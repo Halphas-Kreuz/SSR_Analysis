@@ -1,0 +1,135 @@
+1) Pair Sequences
+
+	> Import all raw data
+	> "Sequence" > "Set Paired Reads"
+	> Insert size: 150bp
+
+	- OR - 
+
+	> Import each pair of read files for one sample at a time
+	> Insert size: 150bp
+	> Forward ("R1") & reverse (R2) reads get paired automatically
+
+2) Trim
+
+	> "Annotate & Predict" > "Trim ends"
+	> "Annotate new trimmed regions"
+	> "Trim primers" & select primer sequences via "Choose ..." (after importing primers -> convert to oligos)
+	> Standard settings "Allow Mismatches" 5 & "Error Probability Limit" 0.05
+	> "Trim 5' End" & "Trim 3' End"
+	> Sequences used: Illumina tails without locus-specific part
+
+	>IL_Arm01_F
+	TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+	>IL_Arm01_R
+	GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+	>IL_Arm03_F
+	TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+	>IL_Arm03_R
+	GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+	>IL_Arm04_F
+	TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+	>IL_Arm04_R
+	GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+	>IL_Arm06_F
+	TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+	>IL_Arm06_R
+	GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+	>IL_Arm07_F
+	TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+	>IL_Arm07_R
+	GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+	>IL_Arm08_F
+	TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+	>IL_Arm08_R
+	GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+	>IL_Arm11_F
+	TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG
+	>IL_Arm11_R
+	GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG
+
+3) Merge
+
+	> "Sequence" > "Merge paired reads"
+	> Standard settings: "Merge Rate" = "Normal", "Maximum memory use" = 1500 MB, "Custom BBMerge options" = "maxloose=f"
+	> Document number of merged reads
+	
+4) Map to Reference
+
+	> "Tools" > "Align & Assemble" > "Map to Reference"
+	> "Reference Sequences"
+
+	>Arm01_PCR_product Arnica montana microsatellite Arm01 sequence.
+	TTACAATGTGTGTGCCTGCGTGTGTGTCTATATATCCATACATACATACATACATACATACATACATACATACATACATACATACATACACATGTATATATATGGAAAGGATCAAATGAGAACTCCT
+	>Arm03_PCR_product Arnica montana microsatellite Arm03 sequence.
+	TCAGGAAGTTTGCCCCTCTCTTTTCTCTTTCCAATCGTTCAACGCAAACAAATTACAGGTAGAAACAAAAACCCTAATTCTCCATCATCATCATCATCGTTCTCGCATTTACATACATACATACATACATACATACACATATATATTTACAGTAAACCCATTGCGCAGCAA
+	>Arm04_PCR_product Arnica montana microsatellite Arm04 sequence.
+	ACTTGCATGTAGAGACGGATGAGTTGTGAGTTAAATCAATCAAAAACCAAAAATACAGATGAAGTGAATCGTTTAATTGATACTATCGAATGGATTAGAATAGTCGGATGCTTGAATCATGACACAATGATTCAGTCATACATACATACATACATACATACATACATACATACATACATACATACATACATACATACATACATACATACACTCGGTTAAGTTCCGACTCCAC
+	>Arm06_PCR_product Arnica montana microsatellite Arm06 sequence.
+	TGTCGCCTCAATCCTTGGTGCCTTATTGCTAGTTCTCATGTTCCCCATACAGGTACGATGACATACATACATACATACATACATACATACATTTTAATATATGTAAAGTTCATTTAGAAAATGTTCTATCTTTGGAAACAGACACTGGTTATCAGTAATATGCAAAGAATGTCCAAGGAAGGACTTCAGC
+	>Arm07_PCR_product Arnica montana microsatellite Arm07 sequence.
+	ACATGACGCAAAAAGCGTAGTTTGTAGGTATAATCACGCATAATAATTATGAAACATATATATATCTATGTATGTATGTATGTATGTATGTATGTATGTATGTATGGTTTTCTGTGAATAATCGCACATTACTATCACACAACGTAGATATAAAATTAAACAAATACATATTGTAATCACGCCTAGTATAATAGCGTTATAAAAATAAAGCGACATGGTGGTAACATGG
+	>Arm08_PCR_product Arnica montana microsatellite Arm08 sequence.
+	AGATGAGGTTCTTGCAGCATCCATGGCTGCCACACCCACTTCTTAAACCATCATCATTTTCATGTTGTATGTATGTATGTATGTATGTATGTATGTATGTATGATTGATGATGCATGAGATACCCTTTACTTCAACTGCAAGCA
+	>Arm11_PCR_product Arnica montana microsatellite Arm11 sequence.
+	TGGCACAAGGTATGTGTTGCATATGTTGTGACTGGTGTGTGTGTGTGTGTGTGTGTGTGAACTGATGGGTGATCATTTGGTGTCAACTTCACAGATGACTGAAAGATTCCAAGAAGGAAAATCTGCAGGATTGGAAGGTGAAAACATTCGGTCGAAGA
+
+	> "Assemble by" is unchecked
+	> "Mapper" = "Geneious", "Sensitivity" = "Medium Sensitivity / Fast"
+	> "Find structural variants, short insertions, and deletions of any kind"
+	> "Do not trim"
+	> "Assembly name" standard settings used
+	> "Save assembly report", "Save list of unused reads", "Save contigs", "Save in sub-folder"
+	> Advanced settings: "Map multiple best matches" = "randomly", "Trim paired read overhangs" checked, 
+	  "Minimum support for structural  variant discovery" = 20, "Include insertions in structural variants" checked
+	> Document number of reads mapped to each locus
+
+5) Record sequences
+
+	> General overview: "Lengths Graph" (histogram of sequence lengths)
+	> Sequences in detail: "Contig View" select all sequences, right click & select "Sort" > "by # Differences to Reference Sequence"
+	> Document 2-4 most common alleles
+		> Sequence of allele, length of allele, number of times this allele was found (exact matches!)
+		> Determine exact count of sequences over Contig View > shift select, amount shown at bottom of screen & compare approximately with Lengths Graph
+		> Allele sequence can be copied with gaps, gaps removed in excel with formula =SUBSTITUTE(cell number;"-";"") or =WECHSELN(cell number;"-";"")
+		> Copy & paste(values) to convert formula to sequence (for search function)
+
+	> Determine minimum number of reads for null allele, esp. for loci with few reads, e.g. Arm07
+		> Compare with number of reads from a sample not present in the pooled library, e.g. AM46_02
+		> create a histogram of read numbers
+		> for Arm07: mimimum accepted reads = 40
+
+	> Determine mimimum frequency for a sequence to count as an allele
+		> Create a histogram of frequency distribution
+		> For homozygous individuals, a sequence will be approximately 65-90% of reads
+		> For heterozygous individuals, each of the two sequences will be approximately 20-60% of reads
+		> Other sequences can make up to approximately 15% of reads; extremely variable from sample to sample
+		> Here, the threshold was determined at 20% of reads, with certain rare exceptions, e.g. in cases where samples had a high amount of additional 
+		  fragments/reads which lead to an artificially low frequency (AM46_01 Arm06 Allele 233) 
+
+	> Determine which samples/loci cannot be scored
+		> E.g. locus with three similarly common sequences
+
+	> Add allele names
+		> Length + addition for same length / different sequence, e.g. 171a & 171b
+		> Null allele = 0
+		> Cannot be scored = NA
+
+	> View & export summary of sequences/alleles in Geneious
+		> Copy Excel sheet, delete all columns except for allele name and sequence (without gaps), export as csv (may have to change ; -> ,) and import into Geneious
+		> "Align & Assemble" > "Map to Reference" 
+		> Select mapped product, "Align & Assemble" > "Multiple Allign" with Geneious Alignment, "Global Alignment with free end gaps", Cost Matrix "65% similarity"
+		> Export realignment as FASTA (or other file type)
+
+	> Create genotype table
+		> Copy Excel sheet, delete all sequences under determined threshold (e.g. 0,2)
+		> Delete all columns except for sample & allele name
+		> Summarize all loci into one table
+
+
+
+
+
+
+
+
