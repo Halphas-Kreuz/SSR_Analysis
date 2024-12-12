@@ -1,0 +1,9 @@
+Sample ./stuttermark/1614-2_A_tssv_stuttermarked is not suitable for marker AfAa043:
+lowest allele has only 10 reads
+
+Sample ./stuttermark/1614-2_A_tssv_stuttermarked is not suitable for marker AfAa051:
+highest allele has only 19 reads
+
+Sample ./stuttermark/1614-2_A_tssv_stuttermarked is not suitable for marker AfAa052:
+highest allele has only 2 reads
+

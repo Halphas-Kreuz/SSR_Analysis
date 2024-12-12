@@ -86,7 +86,7 @@ rm -f -r alellefinderReports; mkdir alellefinderReports
 for file in ./stuttermark/*.txt
 do
 echo ${file:14:-4}
-fdstools allelefinder -m ${M1} -n ${N1} -a ${A} -x ${X} -M ${MNP} -c annotation -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
+fdstools allelefinder -m ${M1} -n ${N1} -a ${A} -x ${X} -M ${MNP}  -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
 done
 
 
@@ -245,7 +245,7 @@ rm -f -r alellefinderReports; mkdir alellefinderReports
 for file in ./stuttermark/*.txt
 do
 echo ${file:14:-4}
-fdstools allelefinder -m ${M2} -n ${N2} -a ${A} -x ${X} -M ${MNP} -c annotation -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
+fdstools allelefinder -m ${M2} -n ${N2} -a ${A} -x ${X} -M ${MNP}  -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
 done
 
 
@@ -438,7 +438,7 @@ rm -f -r alellefinderReports; mkdir alellefinderReports
 for file in ./stuttermark/*.txt
 do
 echo ${file:14:-4}
-fdstools allelefinder -m ${M1} -n ${N1} -x ${X} -M ${MNP} -c annotation -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
+fdstools allelefinder -m ${M1} -n ${N1} -x ${X} -M ${MNP}  -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
 done
 
 # concatenate all resulting allele across individuals (except the firt line which is a header)
@@ -617,7 +617,7 @@ rm -f -r alellefinderReports; mkdir alellefinderReports
 for file in ./stuttermark/*.txt
 do
 echo ${file:14:-4}
-fdstools allelefinder -m ${M2} -n ${N2} -x ${X} -M ${MNP} -c annotation -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
+fdstools allelefinder -m ${M2} -n ${N2} -x ${X} -M ${MNP} -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
 done
 
 # concatenate all resulting allele across individuals (except the firt line which is a header)
@@ -833,7 +833,7 @@ rm -f -r alellefinderReports; mkdir alellefinderReports
 for file in ./stuttermark/*.txt
 do
 echo ${file:14:-4}
-fdstools allelefinder -m ${M1} -n ${N1} -x 10 -M 75 -c annotation -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
+fdstools allelefinder -m ${M1} -n ${N1} -x 10 -M 75 -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
 done
 
 # specific cpSSR calling section : when more than one allele called : select the one with the highest number of repeats
@@ -1050,7 +1050,7 @@ rm -f -r alellefinderReports; mkdir alellefinderReports
 for file in ./stuttermark/*.txt
 do
 echo ${file:14:-4}
-fdstools allelefinder -m ${M2} -n ${N2} -x 10 -M 75 -c annotation -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
+fdstools allelefinder -m ${M2} -n ${N2} -x 10 -M 75  -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
 done
 
 # specific cpSSR calling section : when more than one allele called : select the one with the highest number of repeats
