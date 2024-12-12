@@ -17,5 +17,10 @@ A=${15:-2}
 
 
 
-echo "***fdstools allelefinder -m ${M1} -n ${N1} -a ${A} -x ${X} -M ${MNP} -c annotation***"
-# fdstools allelefinder -m ${M1} -n ${N1} -a ${A} -x ${X} -M ${MNP} -c annotation -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt
+
+for file in ./stuttermark/*.txt
+do
+echo ${file:14:-4}
+# echo "***fdstools allelefinder -m ${M1} -n ${N1} -a ${A} -x ${X} -M ${MNP} -c annotation***"
+echo "fdstools allelefinder -m ${M1} -n ${N1} -a ${A} -x ${X} -M ${MNP} -c annotation -l ${ANALYSIS}_${TYPE}_FDSTools_InputFile.txt $file -o ./allelefinder/${file:14:-4}_allelefinder.txt -R ./alellefinderReports/${file:14:-4}_AFreport.txt"
+done
