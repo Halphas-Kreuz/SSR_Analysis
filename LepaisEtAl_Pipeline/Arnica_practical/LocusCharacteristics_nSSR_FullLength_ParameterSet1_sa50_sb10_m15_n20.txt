@@ -1,0 +1,7 @@
+Loci	NallelesSequence	NalleleSize	MissingRate	AllelicMismatches	DiploidGenotypesComparred	AllelicError
+Arm01	0	0	100.00000%	0	0	% 
+Arm03	0	0	100.00000%	0	0	% 
+Arm04	0	0	100.00000%	0	0	% 
+Arm06	0	0	100.00000%	0	0	% 
+Arm07	0	0	100.00000%	0	0	% 
+Arm08	0	0	100.00000%	0	0	% 
