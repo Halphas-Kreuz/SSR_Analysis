@@ -1,0 +1,83 @@
+; Lines beginning with a semicolon (;) are ignored by FDSTools.
+
+[aliases]
+; Assign an explicit allele name to a specific sequence of a specific marker.
+; Specify three comma-separated values: marker name, sequence, and allele name.
+; You may use the alias name in the flanks, prefix, and suffix sections to
+; specify them for this allele specifically. You cannot specify a repeat
+; structure for an alias.
+; AmelX    = Amel, GAT, X
+; AmelY    = Amel, AATAAAGTG, Y
+
+[flanks]
+; The flanking sequences (e.g., primer sequences) of each marker. Specify two
+; comma-separated values: left flank and right flank, in the same sequence
+; orientation (strand).
+Arm01   = TTACAATGTGTGTGCCTGCG, AGGAGTTCTCATTTGATCCTTTCC
+Arm03   = TCAGGAAGTTTGCCCCTCTC, TTGCTGCGCAATGGGTTTAC
+Arm04   = ACTTGCATGTAGAGACGGATG, GTGGAGTCGGAACTTAACCG
+Arm06   = TGTCGCCTCAATCCTTGGTG, GCTGAAGTCCTTCCTTGGAC
+Arm07   = ACATGACGCAAAAAGCGTAG, CCATGTTACCACCATGTCGC
+Arm08   = AGATGAGGTTCTTGCAGCATC, TGCTTGCAGTTGAAGTAAAGGG
+Arm11   = TGGCACAAGGTATGTGTTGC, TCTTCGACCGAATGTTTTCACC
+
+
+[prefix]
+; Specify all known prefix sequences of each STR marker, separated by commas.
+; The prefix is the sequence between the left flank and the repeat and is
+; omitted from allele names. The first sequence listed is used as the reference
+; sequence for that marker when generating allele names. Deviations from the
+; reference are expressed as variants.
+
+[suffix]
+; Specify all known suffix sequences of each STR marker, separated by commas.
+; The suffix is the sequence between the repeat and the right flank. The first
+; sequence listed is used as the reference sequence for that marker when
+; generating allele names.
+
+
+[repeat]
+; Specify the repeat structure of each STR marker in space-separated triples of
+; sequence, minimum number of repeats, and maximum number of repeats.
+AfAa002     = AAC 0 30 ACC 0 20 AAC 0 60 ACC 0 20
+Arm01   = CATA 0 30
+Arm03   = TACA 0 30
+Arm04   = CATA 0 30
+Arm06   = ACAT 0 30
+Arm07   = TATG 0 30
+Arm08   = TGTA 0 30
+Arm11   = GT 0 30
+
+
+[length_adjust]
+; To prevent discrepancies between traditional CE allele numbers and the CE
+; number in FDSTools allele names, the CE allele number as calculated by
+; FDSTools is based on the length of the sequence (prefix+repeat+suffix) minus
+; the adjustment specified here.
+; D1S1656  =  8
+; D22S1045 = -9
+
+[block_length]
+; Specify the repeat unit length of each STR marker. The default length is 4.
+Arm01   = 4
+Arm03   = 4
+Arm04   = 4
+Arm06   = 4
+Arm07   = 4
+Arm08   = 4
+Arm11   = 2
+
+
+[max_expected_copies]
+; Specify the maximum expected number of copies (i.e., alleles) for each marker
+; in a single reference sample (only used for allelefinder). The default is 2.
+; Specify 1 here for haploid markers (i.e., those on the Y chromosome).
+; DYS391   = 1
+
+[expected_allele_length]
+; Specify one or two values for each marker. The first value gives the expected
+; minimum length (in nucleotides, including prefix and suffix, excluding
+; flanks) of the alleles and the second value (if given) specifies the maximum
+; allele length expected for that marker (both inclusive). TSSV will filter
+; sequences that have a length outside this range.
+
