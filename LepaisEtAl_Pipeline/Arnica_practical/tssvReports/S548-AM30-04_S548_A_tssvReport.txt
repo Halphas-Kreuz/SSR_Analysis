@@ -1,0 +1,11 @@
+marker	unique_seqs	tPaired	fPaired	rPaired	tLeft	fLeft	rLeft	tRight	fRight	rRight
+Arm01	0	0	0	0	4765	4762	3	4750	5	4745
+Arm03	0	0	0	0	4619	4616	3	4584	3	4581
+Arm04	0	0	0	0	7183	7182	1	7089	1	7088
+Arm06	0	0	0	0	3987	3987	0	3945	0	3945
+Arm07	0	0	0	0	3416	3413	3	3405	2	3403
+Arm08	0	0	0	0	5852	5851	1	5835	1	5834
+Arm11	0	0	0	0	4546	4546	0	4502	0	4502
+
+total reads	34420
+unrecognised reads	2
