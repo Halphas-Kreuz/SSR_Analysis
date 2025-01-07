@@ -1,0 +1,21 @@
+Sample ./stuttermark/S516-AM46-02_S516_B_tssv_stuttermarked is not suitable for marker Arm01:
+lowest allele has only 7 reads
+
+Sample ./stuttermark/S516-AM46-02_S516_B_tssv_stuttermarked is not suitable for marker Arm03:
+highest allele has only 19 reads
+
+Sample ./stuttermark/S516-AM46-02_S516_B_tssv_stuttermarked is not suitable for marker Arm04:
+lowest allele has only 8 reads
+
+Sample ./stuttermark/S516-AM46-02_S516_B_tssv_stuttermarked is not suitable for marker Arm06:
+lowest allele has only 6 reads
+
+Sample ./stuttermark/S516-AM46-02_S516_B_tssv_stuttermarked is not suitable for marker Arm07:
+highest allele has only 8 reads
+
+Sample ./stuttermark/S516-AM46-02_S516_B_tssv_stuttermarked is not suitable for marker Arm08:
+lowest allele has only 11 reads
+
+Sample ./stuttermark/S516-AM46-02_S516_B_tssv_stuttermarked is not suitable for marker Arm11:
+lowest allele has only 14 reads
+

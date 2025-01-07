@@ -1,8 +1,8 @@
 marker	sequence	total	forward	reverse	flags
 Arm01	No data	0	0	0	
-Arm03	No data	0	0	0	
-Arm04	No data	0	0	0	
+Arm03	Other sequences	1	1	0	
+Arm04	Other sequences	2	2	0	
 Arm06	No data	0	0	0	
 Arm07	No data	0	0	0	
 Arm08	No data	0	0	0	
-Arm11	No data	0	0	0	
+Arm11	Other sequences	1	1	0	

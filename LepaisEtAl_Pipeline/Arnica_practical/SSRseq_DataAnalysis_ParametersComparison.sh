@@ -66,7 +66,7 @@ do
 	done
 cat tmpLocusCoverage.txt | tr "\n" "\t" | sed -e '$a\' >> LocusCoverageperIndividual_${ANALYSIS}_${TYPE}.txt
 done < ${ANALYSIS}_LocusList.txt
-rm tmpLocusCoverage.txt
+# rm tmpLocusCoverage.txt
 
 ######################### analysis with PARAMSET1###################################
 
@@ -81,8 +81,8 @@ done
 
 # running allelefinder 
 echo "***************FDSTools allelefinder ${PARAMSET1} analysis***************"
-rm -f -r allelefinder; mkdir allelefinder
-rm -f -r alellefinderReports; mkdir alellefinderReports
+# rm -f -r allelefinder; mkdir allelefinder
+# rm -f -r alellefinderReports; mkdir alellefinderReports
 for file in ./stuttermark/*.txt
 do
 echo ${file:14:-4}
@@ -99,7 +99,7 @@ awk 'FNR>1' ./allelefinder/*.txt >> AllAlleles.txt
 
 # creating allele naming convention file
 echo "***************Listing allele sequence, allele size, allele code and allele count***************"
-rm -f AlleleNamingConvention_${ANALYSIS}_${TYPE}_${PARAMSET1}_sa${S1a}_sb${S1b}_m${M1}_n${N1}.txt
+# rm -f AlleleNamingConvention_${ANALYSIS}_${TYPE}_${PARAMSET1}_sa${S1a}_sb${S1b}_m${M1}_n${N1}.txt
 while read locus
 do
 	echo $locus
@@ -122,7 +122,7 @@ do
 	grep ^$locus AlleleNamingConvention_${ANALYSIS}_${TYPE}_${PARAMSET1}_sa${S1a}_sb${S1b}_m${M1}_n${N1}.txt | cut -f2,3 | sed -e $'s!\t!$/!' | sed -e 's$^$s/^$' | sed -e 's?$?/g?' > tmp_seddScript.txt
 	paste <(awk -v l=$locus '$2==l { print $1, $2 }' AllAlleles.txt) <(awk -v l=$locus '$2==l { print $4 }' AllAlleles.txt | sed -f tmp_seddScript.txt) | sed 's/\t/ /' >> AlleleNamed.txt
 done < ${ANALYSIS}_LocusList.txt
-rm tmp_seddScript.txt
+# rm tmp_seddScript.txt
 
 # clearing the names of individuals
 echo "***************Individual name cleaning***************"
@@ -132,11 +132,11 @@ sed -i -E 's%.assembled%%g' AlleleNamed.txt
 
 # formating allele information file
 echo "***************Retrieving allele information across locus***************"
-rm -f AllAlleleSeq.txt
+# rm -f AllAlleleSeq.txt
 while read locus seq code n
 do
 counter=1
-rm -f tmp_alleleSeq.txt
+# rm -f tmp_alleleSeq.txt
 stg=$(echo $seq | sed "s/(/\t/g" | sed "s/)/\t/g" | sed "s/ /\t/g")
 while [ $counter -le $(echo $stg | awk '{print NF}' | sort -nu | tail -n 1) ]
 do
