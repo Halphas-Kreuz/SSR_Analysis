@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Input folder containing the data files
-input_folder="../stuttermark"
+input_folder="../tssvResults"
 
 # File containing the names to search for
 names_file="../nSSR_LocusList.txt"
 
 # Output folder for the filtered files
-output_folder="../filtered_2_line"
+output_folder="../filtered_2_line_tssvResults"
 
 # Ensure the output folder exists
 rm -rf "$output_folder"
@@ -17,9 +17,10 @@ mkdir  "$output_folder"
 for data_file in "$input_folder"/*.txt; do
   # Get the base name of the file (e.g., "A.txt" -> "A")
   base_name=$(basename "$data_file" .txt)
+  new_name=$(echo "$base_name" | sed -E 's/.*AM(.*)/AM\1/')
   
   # Create the output file name with "_filtered" appended
-  output_file="$output_folder/${base_name}_filtered.txt"
+  output_file="$output_folder/${new_name}_filtered.txt"
 
   # Clear the output file if it exists, to avoid appending
   > "$output_file"
@@ -31,5 +32,4 @@ for data_file in "$input_folder"/*.txt; do
   done < "$names_file"
 done
 
-
-#usage : ./filter_folder_files.sh input_folder names_file.txt output_folder
+# be careful, there is a nc sample which need to be correct manually.

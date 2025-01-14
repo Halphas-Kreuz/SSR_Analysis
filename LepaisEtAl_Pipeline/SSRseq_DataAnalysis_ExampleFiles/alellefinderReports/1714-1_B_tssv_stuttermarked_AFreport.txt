@@ -1,3 +1,0 @@
-Sample ./stuttermark/1714-1_B_tssv_stuttermarked is not suitable for marker AfAa052:
-highest allele has only 4 reads
-
