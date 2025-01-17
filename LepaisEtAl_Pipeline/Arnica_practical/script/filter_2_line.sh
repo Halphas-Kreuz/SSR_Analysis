@@ -1,13 +1,16 @@
 #!/bin/bash
 
+#16.01 : I am trying to make a whole script which can do everything. 
+#later change : for the tssvResults and stuttermark, two loops needed  
+
 # Input folder containing the data files
-input_folder="../tssvResults"
+input_folder="../tssvReports"
 
 # File containing the names to search for
 names_file="../nSSR_LocusList.txt"
 
 # Output folder for the filtered files
-output_folder="../filtered_2_line_tssvResults"
+output_folder="../filtered_tssvReports"
 
 # Ensure the output folder exists
 rm -rf "$output_folder"
