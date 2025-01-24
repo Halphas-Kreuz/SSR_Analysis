@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Folder containing the files
-input_folder="../tssvReports"
+input_folder="../samples"
 
 # Loop through all files in the folder
 for file in "$input_folder"/*; do
