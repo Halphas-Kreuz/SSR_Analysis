@@ -1,9 +1,15 @@
 import csv
 
-# f = open("../LocusCoverageperIndividual_nSSR_FullLength.txt","r")
-# print(f.read())
-with open('../LocusCoverageperIndividual_nSSR_FullLength.csv', newline='') as csvfile:
-    spamreader = csv.reader(csvfile, delimiter=' ')
-    # for row in spamreader:
-    #     print(', '.join(row))
+matrix = []
+
+with open('../LocusCoverageperIndividual_nSSR_FullLength.csv', newline='',) as file:
+    reader = csv.reader(file,delimiter = '\t')
+    for row in reader: 
+        matrix.append(row)
+
+def search_column(matrix, word):
+    if word in matrix[0]:
+        col_index = matrix[0].index(word)
+        
+
 
