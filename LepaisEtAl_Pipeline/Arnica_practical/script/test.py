@@ -5,7 +5,7 @@ import os
 #step 1 : find out the sample to be searched (if found, then read it )
 
 test_sample_name = 'AM30-01_S540_A'
-loci_list = ["Arm01", "Arm03", "Arm04", "Arm06", "Arm07", "Arm08"]  
+loci_list = ["Arm01", "Arm03", "Arm04", "Arm06", "Arm07", "Arm08","Arm11"]  
 
 def search_folder(folder_path, keyword):
     for file_name in os.listdir(folder_path):
@@ -20,7 +20,7 @@ def search_folder(folder_path, keyword):
             # print("-" * 50)
             return matrix 
         
-sample_file= search_folder('../filtered_part/filtered_2_line_stuttermarked', test_sample_name)
+sample_file= search_folder('../filtered_part/filtered_stuttermarked', test_sample_name)
 
 
 # step 2 : construct the score matrix
@@ -80,7 +80,7 @@ def select_loci(sample_file, loci='Arm01'):
             candidate2_Name = row[1]
             candidate2_Count = row[2]
     # print(candidate1, candidate2)
-    print (candidate1_Name,candidate1_Count,candidate2_Name,candidate2_Count) 
+    # print (candidate1_Name,candidate1_Count,candidate2_Name,candidate2_Count) 
     return (candidate1_Name,candidate1_Count,candidate2_Name,candidate2_Count)  # Return the selected candidates (two values )
 
 select_loci(cleaned_empty_sample_matrix)

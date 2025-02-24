@@ -29,7 +29,7 @@ for data_file in "$input_folder"/*.txt; do
   > "$output_file"
 
   # Process each name in the names file
-  while IFS= read -r name; do
+  while IFS= read -r name || [[ -n "$name" ]]; do # now it does not ignore the last line
     # Extract the first two lines for each name and append to the output file
     grep "^$name" "$data_file" | head -n 2 >> "$output_file"
   done < "$names_file"
