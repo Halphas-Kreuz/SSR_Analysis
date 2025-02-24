@@ -85,13 +85,21 @@ def select_loci(sample_file, loci='Arm01'):
 
 select_loci(cleaned_empty_sample_matrix)
 
+# help function : for the loci list check
+# def get_locus_index(locus_name, loci_list):
+#     try:
+#         index = loci_list.index(locus_name) + 1  # Add 1 to convert 0-based index to 1-based
+#         return index
+#     except ValueError:
+#         return None  # Return None if the locus is not found
 def PercentNumber(sample_name, loci="Arm01"):
+    get_locus_index = lambda locus_name: loci_list.index(locus_name) + 1
     score_column = search_column(score_matrix, sample_name)  #load the sum of loci count 
     loci_line = select_loci(cleaned_empty_sample_matrix, loci)  #load the loci name and count (beware, this tuple has four values )
 
     if score_column and len(score_column) > 1 and score_column[1] != 0:  # Avoid division by zero
-        first_candidate_percent = round(int(loci_line[1]) / int(score_column[1]), 3) if loci_line[1] is not None else None
-        second_candidate_percent = round(int(loci_line[3]) / int(score_column[1]), 3) if loci_line[3] is not None else None
+        first_candidate_percent = round(int(loci_line[1]) / int(score_column[get_locus_index(loci)]), 3) if loci_line[1] is not None else None
+        second_candidate_percent = round(int(loci_line[3]) / int(score_column[get_locus_index(loci)]), 3) if loci_line[3] is not None else None
 
         print(f"First candidate for {sample_name} {loci} is {loci_line[0]} {first_candidate_percent}")
         print(f"Second candidate for {sample_name} {loci} is {loci_line[2]} {second_candidate_percent}")
