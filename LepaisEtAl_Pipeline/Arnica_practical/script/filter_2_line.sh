@@ -7,10 +7,10 @@
 names_file="../nSSR_LocusList.txt"
 
 # Input folder containing the data files
-input_folder="../tssvReports"
+input_folder="../tssvResults"
 
 # Output folder for the filtered files
- output_folder="../filtered_tssvReports"
+ output_folder="../filtered_tssvResults"
 
 # Ensure the output folder exists
 rm -rf "$output_folder"
