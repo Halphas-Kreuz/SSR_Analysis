@@ -29,7 +29,20 @@ filter_files() {
   done
 }
 
+# automatically convert everything 
+convert_txt_to_csv() {
+  local folder="../filtered_results/$(basename "$1")"
+  for file in "$folder"/*.txt; do
+    mv "$file" "${file%.txt}.csv"
+  done
+}
+
+
 # Hardcoded folder paths
 filter_files "../tssvResults" "../filtered_tssvResults"
 filter_files "../stuttermark" "../filtered_stuttermark"
 filter_files "../tssvReports" "../filtered_tssvReports"
+
+convert_txt_to_csv "../filtered_tssvResults"
+convert_txt_to_csv "../filtered_stuttermark"
+convert_txt_to_csv "../filtered_tssvReports"
