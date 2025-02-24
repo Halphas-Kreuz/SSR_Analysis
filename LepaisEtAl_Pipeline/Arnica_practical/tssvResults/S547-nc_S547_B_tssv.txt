@@ -1,0 +1,8 @@
+marker	sequence	total	forward	reverse
+Arm01	No data	0	0	0
+Arm03	Other sequences	1	0	1
+Arm04	Other sequences	2	0	2
+Arm06	No data	0	0	0
+Arm07	No data	0	0	0
+Arm08	No data	0	0	0
+Arm11	Other sequences	1	0	1
