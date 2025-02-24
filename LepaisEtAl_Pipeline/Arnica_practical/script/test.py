@@ -20,7 +20,7 @@ def search_folder(folder_path, keyword):
             # print("-" * 50)
             return matrix 
         
-sample_file= search_folder('../filtered_part/filtered_stuttermarked', test_sample_name)
+sample_file= search_folder('../filtered_results/filtered_stuttermark', test_sample_name)
 
 
 # step 2 : construct the score matrix
