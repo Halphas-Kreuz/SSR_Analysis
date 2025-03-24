@@ -39,7 +39,7 @@ Arm11   = TGGCACAAGGTATGTGTTGC, TCTTCGACCGAATGTTTTCACC
 [repeat]
 ; Specify the repeat structure of each STR marker in space-separated triples of
 ; sequence, minimum number of repeats, and maximum number of repeats.
-AfAa002     = AAC 0 30 ACC 0 20 AAC 0 60 ACC 0 20
+; AfAa002     = AAC 0 30 ACC 0 20 AAC 0 60 ACC 0 20'
 Arm01   = CATA 0 30
 Arm03   = TACA 0 30
 Arm04   = CATA 0 30

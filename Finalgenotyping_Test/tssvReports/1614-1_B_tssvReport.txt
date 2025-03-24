@@ -1,0 +1,14 @@
+marker	unique_seqs	tPaired	fPaired	rPaired	tLeft	fLeft	rLeft	tRight	fRight	rRight
+AfAa010	1	1	1	0	128	128	0	2	2	0
+AfAa011	51	345	345	0	781	781	0	592	592	0
+AfAa018	22	408	408	0	409	409	0	408	408	0
+AfAa021	1	8	8	0	9	9	0	8	8	0
+AfAa023	0	0	0	0	2	2	0	1	1	0
+AfAa028	12	102	102	0	112	112	0	110	110	0
+AfAa041	4	11	11	0	11	11	0	11	11	0
+AfAa051	1	1	1	0	164	161	3	19	10	9
+AfAa054	16	176	176	0	180	180	0	190	187	3
+AfAa060	13	57	57	0	58	57	1	70	70	0
+
+total reads	10069
+unrecognised reads	8054

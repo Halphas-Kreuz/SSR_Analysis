@@ -1,0 +1,7 @@
+Arm01 RepeatFocused	ParameterSet1	50	10	15	20	50	10	2
+Arm03 RepeatFocused	ParameterSet1	50	10	15	20	50	10	2
+Arm04 RepeatFocused	ParameterSet1	50	10	15	20	50	10	2
+Arm06 RepeatFocused	ParameterSet1	50	10	15	20	50	10	2
+Arm07 RepeatFocused	ParameterSet1	50	10	15	20	50	10	2
+Arm08 RepeatFocused	ParameterSet1	50	10	15	20	50	10	2
+Arm11 RepeatFocused	ParameterSet1	50	10	15	20	50	10	2
