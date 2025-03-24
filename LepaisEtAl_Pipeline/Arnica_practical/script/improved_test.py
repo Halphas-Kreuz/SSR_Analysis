@@ -3,7 +3,7 @@ import os
 import json
 
 folder_path = '../filtered_results/filtered_tssvResults'
-sample_name = 'AM30-01_S540_A'
+sample_name = 'AM30-09_S509_A'
 loci_list = ["Arm01", "Arm03", "Arm04", "Arm06", "Arm07", "Arm08", "Arm11"]  
 locus_coverage_file = "../LocusCoverageperIndividual_nSSR_FullLength.csv"
 AlleleInformation = "../AlleleInformationFile_nSSR_FullLength_ParameterSet2_sa70_sb10_m10_n20.csv"
@@ -64,6 +64,7 @@ def process_sample():
         
         candidate2 = loci_data[1]
         second_percent = round(int(candidate2[1]) / int(score_column[get_locus_index(loci)]), 3)
+        #rewrite here 
         
         return {loci: {"first_candidate": (candidate1[0], len(candidate1[0]),  first_percent), "second_candidate": (candidate2[0], len(candidate2[0]), second_percent)}}
     
@@ -71,7 +72,8 @@ def process_sample():
     for loci in loci_list:
         results.update(PercentNumber(sample_name, loci))
     
-    return json.dumps(results, indent=4)
+    # return json.dumps(results, indent=4)
+    return results
 
 result = process_sample()
 print(result)
