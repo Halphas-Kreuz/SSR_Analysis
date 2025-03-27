@@ -7,7 +7,7 @@ import re
 #parameter part 
 
 folder_path = '../filtered_results/filtered_tssvResults'
-sample_name = 'AM30-09_S509_A' # this is only as test 
+# sample_name = 'AM30-09_S509_A' # this is only as test 
 loci_list = ["Arm01", "Arm03", "Arm04", "Arm06", "Arm07", "Arm08", "Arm11"]  
 locus_coverage_file = "../LocusCoverageperIndividual_nSSR_FullLength.csv"
 AlleleInformation = "../AlleleInformationFile_nSSR_FullLength_ParameterSet2_sa70_sb10_m10_n20.csv"
@@ -27,11 +27,10 @@ def extract_names_from_folder(folder_path):
     return extracted_names
 
 sample_list = extract_names_from_folder(folder_path)
-print (sample_list)
 
-# n
 
-def process_sample():
+def process_sample(sample_name):
+    # still keep as filter or not ? 
     def search_folder(folder_path, keyword):
         for file_name in os.listdir(folder_path):
             if keyword in file_name and file_name.endswith('.csv'):
@@ -40,10 +39,13 @@ def process_sample():
                     reader = csv.reader(file, delimiter='\t')
                     return [row for row in reader] 
         return None
+        
 
     sample_file = search_folder(folder_path, sample_name)
     if sample_file is None:
         return f"Sample '{sample_name}' not found in folder."
+
+    print(sample_file)
 
     score_matrix = []
     def open_file(file_path):
@@ -101,35 +103,35 @@ def process_sample():
 
 data = []
 #extraction phase
-for i in range(3):
-    data.append(process_sample(sample_list[i]))
-print(data)
+# for i in range(3):
+#     data.append(process_sample(sample_list[i]))
+# print(data)
 
-# output_csv_filename = '../new_output/AlleleInfo.csv'
+output_csv_filename = '../new_output/AlleleInfo.csv'
 
-# with open(output_csv_filename, mode='w', newline='') as file:
-#     writer = csv.writer(file)
+with open(output_csv_filename, mode='w', newline='') as file:
+    writer = csv.writer(file)
 
-#     # Write header
-#     writer.writerow(["Serial", "Sample", "Loci", "Allele1", "Allele2", "Frequency1", "Frequency2"])
+    # Write header
+    writer.writerow(["Serial", "Sample", "Loci", "Allele1", "Allele2", "Frequency1", "Frequency2"])
 
-#     serial = 1  # Serial number starts at 1
+    serial = 1  # Serial number starts at 1
 
-#     for sample, candidates in data.items():
-#         alleles = list(candidates.values())  # Convert dictionary values to a list
+    for sample, candidates in data.items():
+        alleles = list(candidates.values())  # Convert dictionary values to a list
 
-#         # Extract allele 1 details
-#         allele1_seq, allele1_length, allele1_freq = alleles[0]
+        # Extract allele 1 details
+        allele1_seq, allele1_length, allele1_freq = alleles[0]
         
-#         # Extract allele 2 details if present
-#         if len(alleles) > 1:
-#             allele2_seq, allele2_length, allele2_freq = alleles[1]
-#         else:
-#             allele2_seq, allele2_length, allele2_freq = "", "", ""  # No second allele
+        # Extract allele 2 details if present
+        if len(alleles) > 1:
+            allele2_seq, allele2_length, allele2_freq = alleles[1]
+        else:
+            allele2_seq, allele2_length, allele2_freq = "", "", ""  # No second allele
 
-#         # Write row to CSV
-#         writer.writerow([serial, sample_name, sample, allele1_seq, allele2_seq, allele1_freq, allele2_freq])
+        # Write row to CSV
+        writer.writerow([serial, sample_name, sample, allele1_seq, allele2_seq, allele1_freq, allele2_freq])
         
-#         serial += 1  # Increment serial number
+        serial += 1  # Increment serial number
 
-# print(f"CSV file '{output_csv_filename}' created successfully!")
+print(f"CSV file '{output_csv_filename}' created successfully!")
