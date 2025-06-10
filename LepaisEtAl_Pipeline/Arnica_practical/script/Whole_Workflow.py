@@ -16,6 +16,12 @@ locus_coverage_file = "../LocusCoverageperIndividual_nSSR_FullLength.csv"
 allele_info_csv_filename = '../new_output/AlleleInfo.csv'
 alternative_output_csv_filename = '../new_output/Alternative_AlleleInfo.csv'
 
+#translation dictionary part
+sorted_frequency_file = '../new_output/sorted_frequency_with_first_occurrence.csv'
+allele_information_file = '../new_output/AlleleInformationFile_nSSR_FullLength_ParameterSet2_sa70_sb10_m10_n20.csv'
+
+
+
 # Utility Functions
 def extract_names_from_folder(folder_path):
     """Extract sample names from the folder."""
@@ -66,6 +72,48 @@ def write_csv(output_filename, sample_list, process_sample_func):
                     ])
                 serial += 1
         print(f"CSV file '{output_filename}' created successfully!")
+
+def save_dictionary_as_csv(matrix, output_filename):
+    """Save the dictionary matrix as a CSV file."""
+    with open(output_filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        # Write header
+        writer.writerow(["Fused_Index", "Second_Column", "Fifth_Column", "Length_of_Fifth_Column"])
+        # Write matrix rows
+        writer.writerows(matrix)
+    print(f"Dictionary matrix saved to '{output_filename}' successfully!")
+
+# Dictionary Functions (from dictionary_1.py)
+def load_data():
+    """Load data from two CSV files and create a matrix."""
+    # Read the first CSV file into a list
+    with open(sorted_frequency_file, 'r') as file1:
+        reader1 = csv.reader(file1)
+        table1 = [row for row in reader1]
+
+    # Read the second CSV file into a list
+    with open(allele_information_file, 'r') as file2:
+        reader2 = csv.reader(file2)
+        table2 = [row for row in reader2]
+        data_rows = table2[1:]  # Skip the header row
+
+    matrix = []
+    for row in data_rows:
+        if len(row) >= 5:  # Ensure sufficient columns
+            fused_index = row[0] + "_" + row[2]
+            triplet = [fused_index, row[1], row[4], len(row[4])]  # 2nd, 3rd, and 5th columns
+            matrix.append(triplet)
+    return matrix
+
+def search_in_matrix(matrix, search_string):
+    """Search for a string in the matrix and return the corresponding element."""
+    for row in matrix:
+        if len(row) >= 3:  # Ensure the row has at least 3 elements
+            if row[1] == search_string:  # Check if the second element matches
+                return row[2]  # Return the third element
+            elif row[2] == search_string:  # Check if the third element matches
+                return row[1]  # Return the second element
+    return None  # Return None if no match is found
 
 # Core Processing Functions
 def process_sample(sample_name):
@@ -165,8 +213,17 @@ if __name__ == "__main__":
     # Write Alternative_AlleleInfo.csv
     write_csv(alternative_output_csv_filename, sample_list, process_sample)
 
-    # Load AlleleInfo.csv as a matrix
-    allele_info_matrix = save_csv_as_matrix(allele_info_csv_filename)
-    print("Matrix loaded from AlleleInfo.csv:")
-    for row in allele_info_matrix:
-        print(row)
+    # Load data and search in matrix
+    matrix = load_data()
+
+    # Save dictionary matrix as CSV
+    dictionary_output_csv = '../new_output/DictionaryMatrix.csv'
+    save_dictionary_as_csv(matrix, dictionary_output_csv)
+
+    # Example search in matrix
+    search_string = "TGTGTGTCTATATATC(1)CATA(13)CACATGTATATATAT(1)"  # Replace with the string you want to search for
+    result = search_in_matrix(matrix, search_string)
+    if result:
+        print(f"Found match! The corresponding element is: {result}")
+    else:
+        print("No match found.")
