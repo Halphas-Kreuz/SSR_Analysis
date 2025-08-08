@@ -1,0 +1,21 @@
+Sample ./stuttermark/SC-GER06-744_A_tssv_stuttermarked is not suitable for marker Am-AG-11:
+highest allele has only 17 reads
+
+Sample ./stuttermark/SC-GER06-744_A_tssv_stuttermarked is not suitable for marker Am-AG-2B:
+highest allele has only 2 reads
+
+Sample ./stuttermark/SC-GER06-744_A_tssv_stuttermarked is not suitable for marker Am-ATC-2:
+highest allele has only 2 reads
+
+Sample ./stuttermark/SC-GER06-744_A_tssv_stuttermarked is not suitable for marker Arm01:
+lowest allele has only 12 reads
+
+Sample ./stuttermark/SC-GER06-744_A_tssv_stuttermarked is not suitable for marker Arm02:
+highest non-allele is 76.4% of the highest allele
+246	ALLELE	AATGGAGGGCCCACTGTACCGCTCATTGATAATTCATTTGGTTGTGCAACAAATGAGCCAGCACAACTTTCTGTTAAACC(1)TACA(9)CAAAGT(1)TACA(1)AACAACTAACTACTAAT(1)
+211	ALLELE	T(1)
+188	NOISE	AATGGAGGGCCCACTGTACCGCTCATTGATAATTCATTTGGTTGTGCAACAAATGAGCCAGCACAACTTTCTGTTAAACC(1)TACA(10)CAAAGT(1)TACA(1)AACAACTAACTACTAAT(1)
+
+Sample ./stuttermark/SC-GER06-744_A_tssv_stuttermarked is not suitable for marker Arm10:
+highest allele has only 5 reads
+

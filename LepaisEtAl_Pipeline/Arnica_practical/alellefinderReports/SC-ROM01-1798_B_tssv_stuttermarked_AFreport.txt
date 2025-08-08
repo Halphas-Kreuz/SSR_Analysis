@@ -1,0 +1,21 @@
+Sample ./stuttermark/SC-ROM01-1798_B_tssv_stuttermarked is not suitable for marker Am-AG-4B:
+highest non-allele is 80.3% of the highest allele
+71	ALLELE	TTTGAAGGTTTTTCTTCG(1)AG(2)CA(1)AG(11)TATCGAGCGCGCGTGTGTCAAATAAGGACAAAAATTGACTTTATATGAAAATTTGACAGAAAACAAGAAAAATGGCTAAGTATAGAA(1)
+61	ALLELE	TTTGAAGGTTTTTCTTCG(1)AG(2)CA(1)AG(10)TATCGAGCGCGCGTGTGTCAAATAAGGACAAAAATTGACTTTATATGAAAATTTGACAGAAAACAAGAAAAATGGCTAAGTATAGAA(1)
+57	NOISE	TTTGAAGGTTTTTCTTCG(1)AG(2)CA(1)AG(11)TATCGAGCGCGCGTGTGTCAAATAAGGACAAAAATTGACTTTATATGAAAATTTGACCAAAAACAAGAAAAATGGCTAAGTATAGAA(1)
+
+Sample ./stuttermark/SC-ROM01-1798_B_tssv_stuttermarked is not suitable for marker Am-ATC-3:
+highest allele has only 11 reads
+
+Sample ./stuttermark/SC-ROM01-1798_B_tssv_stuttermarked is not suitable for marker Am-CT-2:
+highest allele has only 15 reads
+
+Sample ./stuttermark/SC-ROM01-1798_B_tssv_stuttermarked is not suitable for marker Arm01:
+highest allele has only 6 reads
+
+Sample ./stuttermark/SC-ROM01-1798_B_tssv_stuttermarked is not suitable for marker Arm06:
+highest allele has only 9 reads
+
+Sample ./stuttermark/SC-ROM01-1798_B_tssv_stuttermarked is not suitable for marker Arm08:
+highest allele has only 17 reads
+

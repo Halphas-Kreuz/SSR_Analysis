@@ -1,0 +1,2 @@
+sample	marker	total	allele
+./stuttermark/NC-2_A_tssv_stuttermarked	Arm02	388	AAGT(1)

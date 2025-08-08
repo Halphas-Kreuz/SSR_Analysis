@@ -1,0 +1,9 @@
+Sample ./stuttermark/SD-AM32-09_B_tssv_stuttermarked is not suitable for marker Am-ATC-3:
+highest allele has only 10 reads
+
+Sample ./stuttermark/SD-AM32-09_B_tssv_stuttermarked is not suitable for marker Am-CT-5:
+highest allele has only 2 reads
+
+Sample ./stuttermark/SD-AM32-09_B_tssv_stuttermarked is not suitable for marker Arm10:
+highest allele has only 4 reads
+

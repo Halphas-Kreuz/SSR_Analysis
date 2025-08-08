@@ -1,0 +1,6 @@
+Sample ./stuttermark/SB-POZO-03_A_tssv_stuttermarked is not suitable for marker Am-AG-11:
+highest allele has only 5 reads
+
+Sample ./stuttermark/SB-POZO-03_A_tssv_stuttermarked is not suitable for marker Arm11:
+highest allele has only 4 reads
+

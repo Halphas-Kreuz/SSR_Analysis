@@ -1,0 +1,36 @@
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Am-AG-11:
+lowest allele has only 4 reads
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Am-AG-2B:
+highest allele has only 16 reads
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Am-AG-4B:
+highest non-allele is 91.7% of the highest allele
+24	ALLELE	TTTGAAGGTTTTTCTTCG(1)AG(2)CA(1)AG(11)TATCGAGCGCGCGTGTGTCAAATAAGGACAAAAATTGACTTTATATGAAAATTTGACCAAAAACAAGAAAAATGGCTAAGTATAGAA(1)
+23	ALLELE	TTTGAAGGTTTTTCTTCG(1)AG(2)CA(1)AG(8)TATCGAGCGCGCGTGTGTCAAATAAGGACAAAAATTGACTTTATATGAAAATTTGACCAAAAACAAGAAAAATGGCTAAGTATAGAA(1)
+22	NOISE	TTTGAAGGTTTTTCTTCG(1)AG(2)CA(1)AG(12)TATCGAGCGCGCGTGTGTCAAATAAGGACAAAAATTGACTTTATATGAAAATTTGACCAAAAACAAGAAAAATGGCTAAGTATAGAA(1)
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Am-ATC-3:
+highest allele has only 15 reads
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Am-CT-2:
+highest allele has only 3 reads
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Am-CT-5:
+highest allele has only 2 reads
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Arm03:
+highest allele has only 3 reads
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Arm05:
+lowest allele has only 9 reads
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Arm06:
+highest allele has only 14 reads
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Arm09:
+highest allele has only 12 reads
+
+Sample ./stuttermark/SD-AM43-19_A_tssv_stuttermarked is not suitable for marker Armo01:
+highest allele has only 3 reads
+

@@ -1,0 +1,18 @@
+Sample ./stuttermark/SC-GER03-317_A_tssv_stuttermarked is not suitable for marker Am-ATC-2:
+lowest allele has only 8 reads
+
+Sample ./stuttermark/SC-GER03-317_A_tssv_stuttermarked is not suitable for marker Arm06:
+highest allele has only 13 reads
+
+Sample ./stuttermark/SC-GER03-317_A_tssv_stuttermarked is not suitable for marker Arm08:
+highest allele has only 19 reads
+
+Sample ./stuttermark/SC-GER03-317_A_tssv_stuttermarked is not suitable for marker Arm10:
+lowest allele has only 11 reads
+
+Sample ./stuttermark/SC-GER03-317_A_tssv_stuttermarked is not suitable for marker Armo01:
+lowest allele has only 6 reads
+
+Sample ./stuttermark/SC-GER03-317_A_tssv_stuttermarked is not suitable for marker Armo02:
+highest allele has only 3 reads
+

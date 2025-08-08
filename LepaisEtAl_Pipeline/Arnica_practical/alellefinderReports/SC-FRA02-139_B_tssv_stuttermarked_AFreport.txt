@@ -1,0 +1,6 @@
+Sample ./stuttermark/SC-FRA02-139_B_tssv_stuttermarked is not suitable for marker Arm08:
+highest allele has only 5 reads
+
+Sample ./stuttermark/SC-FRA02-139_B_tssv_stuttermarked is not suitable for marker Arm11:
+highest allele has only 2 reads
+

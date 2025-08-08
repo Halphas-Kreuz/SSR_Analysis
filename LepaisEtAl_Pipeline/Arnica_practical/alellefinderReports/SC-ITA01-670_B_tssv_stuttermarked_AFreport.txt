@@ -1,0 +1,15 @@
+Sample ./stuttermark/SC-ITA01-670_B_tssv_stuttermarked is not suitable for marker Am-ATC-3:
+highest allele has only 3 reads
+
+Sample ./stuttermark/SC-ITA01-670_B_tssv_stuttermarked is not suitable for marker Am-CT-2:
+highest allele has only 5 reads
+
+Sample ./stuttermark/SC-ITA01-670_B_tssv_stuttermarked is not suitable for marker Am-CT-5:
+highest allele has only 3 reads
+
+Sample ./stuttermark/SC-ITA01-670_B_tssv_stuttermarked is not suitable for marker Arm02:
+highest allele has only 7 reads
+
+Sample ./stuttermark/SC-ITA01-670_B_tssv_stuttermarked is not suitable for marker Arm10:
+highest allele has only 12 reads
+

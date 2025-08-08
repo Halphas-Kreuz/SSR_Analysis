@@ -17,7 +17,7 @@ fi
 # Find and rename files
 find "$directory" -type f | while read -r file; do
     # Compute the new file name
-    new_name=$(echo "$file" | sed 's/_A/A/g; s/_B/B/g')
+    new_name=$(echo "$file" | sed 's/_R1/_A/g; s/_R2/_B/g')
     
     # Rename the file if the name has changed
     if [ "$file" != "$new_name" ]; then

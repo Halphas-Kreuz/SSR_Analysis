@@ -1,0 +1,15 @@
+Sample ./stuttermark/SB-COUT-01_A_tssv_stuttermarked is not suitable for marker Am-AG-2B:
+highest allele has only 7 reads
+
+Sample ./stuttermark/SB-COUT-01_A_tssv_stuttermarked is not suitable for marker Am-ATC-2:
+highest allele has only 3 reads
+
+Sample ./stuttermark/SB-COUT-01_A_tssv_stuttermarked is not suitable for marker Arm04:
+highest allele has only 7 reads
+
+Sample ./stuttermark/SB-COUT-01_A_tssv_stuttermarked is not suitable for marker Arm08:
+highest allele has only 3 reads
+
+Sample ./stuttermark/SB-COUT-01_A_tssv_stuttermarked is not suitable for marker Arm11:
+highest allele has only 5 reads
+
