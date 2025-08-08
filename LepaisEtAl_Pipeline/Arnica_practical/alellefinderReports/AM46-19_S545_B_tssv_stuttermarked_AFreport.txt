@@ -1,3 +1,0 @@
-Sample ./stuttermark/AM46-19_S545_B_tssv_stuttermarked is not suitable for marker Arm08:
-highest allele has only 15 reads
-

@@ -1,4 +1,0 @@
-SSRseq_DataAnalysis_Manual.docx (application/vnd.openxmlformats-officedocument.wordprocessingml.document) 795693 bytes.
-SSRseq_DataAnalysis_ExampleFiles.tar.gz (application/x-gzip) 6166114 bytes.
-SSRseq_DataAnalysis_FinalGenotyping.sh (application/x-sh) 58143 bytes.
-SSRseq_DataAnalysis_ParametersComparison.sh (application/x-sh) 61839 bytes.

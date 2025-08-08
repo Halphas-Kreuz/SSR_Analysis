@@ -1,3 +1,0 @@
-Sample ./stuttermark/AM30-12_S517_A_tssv_stuttermarked is not suitable for marker Arm07:
-lowest allele has only 4 reads
-

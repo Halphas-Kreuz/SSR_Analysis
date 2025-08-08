@@ -1,6 +1,0 @@
-Sample ./stuttermark/AM102-04_S527_A_tssv_stuttermarked is not suitable for marker Arm03:
-lowest allele has only 2 reads
-
-Sample ./stuttermark/AM102-04_S527_A_tssv_stuttermarked is not suitable for marker Arm06:
-highest allele has only 7 reads
-
