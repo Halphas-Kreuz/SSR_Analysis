@@ -17,7 +17,7 @@ AlleleInformation = "../AlleleInformationFile_nSSR_FullLength_ParameterSet2_sa70
 def extract_names_from_folder(folder_path):
     folder = Path(folder_path)
     extracted_names = []
-    pattern = re.compile(r'(.+?_[AB])')
+    pattern = re.compile(r"^(.*_[AB])_")  # Updated pattern
 
     for file in folder.rglob("*.csv"):  # Recursively find all CSV files
         match = pattern.match(file.name)
@@ -60,7 +60,6 @@ def process_sample(extrande):
         return None
 
     score_column = search_column(score_matrix, extrande)
-    print(f"Debug: score_column for {extrande} -> {score_column}")  # Debug print
     #if the count is < 0.25, then drop it 
     if not score_column or len(score_column) < 2:
         return f"Invalid score column data for {extrande}"
@@ -87,7 +86,7 @@ def process_sample(extrande):
 
             # Get the score column value for the locus
             locus_index = get_locus_index(loci)
-            if locus_index >= len(score_column) or not score_column[locus_index].isdigit():
+            if locus_index >= len(score_column) or not score_column[locus_index].strip().isdigit():
                 return {loci: "Invalid score column data"}
 
             locus_score = int(score_column[locus_index])

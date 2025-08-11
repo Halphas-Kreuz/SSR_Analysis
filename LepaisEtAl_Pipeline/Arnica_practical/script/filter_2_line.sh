@@ -13,10 +13,10 @@ filter_files() {
   for data_file in "$input_folder"/*.txt; do
     # Get the base name of the file (e.g., "A.txt" -> "A")
     base_name=$(basename "$data_file" .txt)
-    new_name=$(echo "$base_name" | sed -E 's/.*AM(.*)/AM\1/')
+    # new_name=$(echo "$base_name" | sed -E 's/.*AM(.*)/AM\1/')
     
     # Create the output file name with "_filtered" appended
-    output_file="$output_folder/${new_name}_filtered.txt"
+    output_file="$output_folder/${base_name}_filtered.txt"
 
     # Clear the output file if it exists, to avoid appending
     > "$output_file"
