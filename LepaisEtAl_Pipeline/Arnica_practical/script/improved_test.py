@@ -8,11 +8,11 @@ import re
 
 folder_path = '../filtered_results/filtered_tssvResults'
 # sample_name = 'AM30-09_S509_A' # this is only as test , later it will be applied 
-loci_list = ["Arm01", "Arm02", "Arm03", "Arm04", "Arm05", "Arm06", "Arm07", "Arm08", "Arm09", "Arm10", "Arm11","Armo01", "Armo02", "Armo03", "Am-AG-1", "Am-AG-10", "Am-AG-4B", "Am-AG-11", "Am-CT-5", "Am-ATC-3", "Am-CT-2", "Am-AG-2B", "Am-ATC-2" ]  
+loci_list = ["Arm01", "Arm02", "Arm03", "Arm04", "Arm05", "Arm06", "Arm07", "Arm08", "Arm09", "Arm10", "Arm11","Armo01", "Armo02", "Armo03", "Am-AG-1", "Am-AG-10", "Am-AG-4B", "Am-AG-11", "Am-CT-5", "Am-ATC-3", "Am-CT-2", "Am-AG-2B","Am-ATC-2",]  
 locus_coverage_file = "../LocusCoverageperIndividual_nSSR_FullLength.csv"
 AlleleInformation = "../AlleleInformationFile_nSSR_FullLength_ParameterSet2_sa70_sb10_m10_n20.csv"
 
-#recursively extract all the data name from the folder 
+#recursively extract all the data name from the folder
 
 def extract_names_from_folder(folder_path):
     folder = Path(folder_path)
@@ -24,13 +24,12 @@ def extract_names_from_folder(folder_path):
         if match:
             extracted_names.append(match.group(1))
 
-    return extracted_names
+    return sorted(extracted_names)
 
 sample_list = extract_names_from_folder(folder_path)
 
 
 def process_sample(extrande):
-    # still keep as filter or not ? 
     def search_folder(folder_path, keyword):
         for file_name in os.listdir(folder_path):
             if keyword in file_name and file_name.endswith('.csv'):
@@ -64,10 +63,10 @@ def process_sample(extrande):
     if not score_column or len(score_column) < 2:
         return f"Invalid score column data for {extrande}"
 
-    def delete_lines_with_keyword(matrix, keyword="Other sequence"):
-        return [row for row in matrix if all(keyword not in element for element in row)]
+    # def delete_lines_with_keyword(matrix, keyword="Other sequence"):
+    #     return [row for row in matrix if all(keyword not in element for element in row)]
     
-    cleaned_sample_matrix = delete_lines_with_keyword(sample_file)
+    # cleaned_sample_matrix = delete_lines_with_keyword(sample_file)
     
     def select_loci(sample_file, loci): 
         loci_rows = [row for row in sample_file if any(loci in element for element in row)]
@@ -79,7 +78,8 @@ def process_sample(extrande):
             get_locus_index = lambda locus_name: loci_list.index(locus_name) + 1
 
             # Select loci data
-            loci_data = select_loci(cleaned_sample_matrix, loci)
+            # loci_data = select_loci(cleaned_sample_matrix, loci)
+            loci_data = select_loci(sample_file, loci)
 
             if len(loci_data) == 0:
                 return {loci: "Insufficient loci data"}
