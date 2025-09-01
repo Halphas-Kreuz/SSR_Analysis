@@ -7,8 +7,7 @@ import re
 #parameter part 
 
 folder_path = '../filtered_results/filtered_tssvResults'
-# sample_name = 'AM30-09_S509_A' # this is only as test , later it will be applied 
-loci_list = ["Arm01", "Arm02", "Arm03", "Arm04", "Arm05", "Arm06", "Arm07", "Arm08", "Arm09", "Arm10", "Arm11","Armo01", "Armo02", "Armo03", "Am-AG-1", "Am-AG-10", "Am-AG-4B", "Am-AG-11", "Am-CT-5", "Am-ATC-3", "Am-CT-2", "Am-AG-2B","Am-ATC-2",]  
+loci_list = ["Arm01", "Arm02", "Arm03", "Arm04", "Arm05", "Arm06", "Arm07", "Arm08", "Arm09", "Arm10", "Arm11","Armo01", "Armo02", "Armo03", "Am-AG-1", "Am-AG-10","Am-AG-2B", "Am-AG-4B", "Am-AG-11", "Am-CT-5","Am-ATC-2" , "Am-ATC-3", "Am-CT-2"]
 locus_coverage_file = "../LocusCoverageperIndividual_nSSR_FullLength.csv"
 AlleleInformation = "../AlleleInformationFile_nSSR_FullLength_ParameterSet2_sa70_sb10_m10_n20.csv"
 
@@ -69,7 +68,7 @@ def process_sample(extrande):
     # cleaned_sample_matrix = delete_lines_with_keyword(sample_file)
     
     def select_loci(sample_file, loci): 
-        loci_rows = [row for row in sample_file if any(loci in element for element in row)]
+        loci_rows = [row for row in sample_file if row and row[0] == loci]
         return [(row[1], row[2]) for row in loci_rows[:2]]  # Extract first two candidates
 
     def PercentNumber(sample_name, loci):
@@ -114,9 +113,14 @@ def process_sample(extrande):
             return {loci: f"Error processing loci data: {str(e)}"}
     
     results = {}
+    print(f"--- Processing sample {extrande} ---") # Add this
+    print(f"Initial size of cleaned matrix: {len(sample_file)}") # Add this
+
+
     for loci in loci_list:
+        print(f"Locus: {loci}, Matrix size: {len(sample_file)}") # Add this
         results.update(PercentNumber(extrande, loci))
-    
+        
     # return json.dumps(results, indent=4)
     return results
 
