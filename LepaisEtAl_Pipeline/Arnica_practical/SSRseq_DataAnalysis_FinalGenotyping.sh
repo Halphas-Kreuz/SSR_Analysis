@@ -26,7 +26,7 @@ X=$(grep -v "failed" ${ANALYSIS}_LocusFinalParameters.txt | cut -f9 | head -n 1)
 A=$(grep -v "failed" ${ANALYSIS}_LocusFinalParameters.txt | cut -f10 | head -n 1)
 
 
-if [ $ANALYSIS = "nSSR" ] && [ $A -gt 2 ]
+if [ $ANALYSIS = "nSSR" ] && [ $A -gt 2 ];
 	then
 echo "Polyploid"
 
@@ -369,7 +369,7 @@ rm -f tmpTable.txt AllAlleleSeq.txt tmp_alleleSeq.txt AlleleNamed.txt
 
 
 
-elif [ $ANALYSIS = "nSSR" ] && [ $A -eq 2 ]
+elif [ $ANALYSIS = "nSSR" ] && [ $A -eq 2 ];
 	then
 echo "Diploïd"
 

@@ -7,8 +7,8 @@ import re
 #parameter part 
 
 folder_path = '../filtered_results/filtered_tssvResults'
-# loci_list = ["Arm01", "Arm02", "Arm03", "Arm04", "Arm05", "Arm06", "Arm07", "Arm08", "Arm09", "Arm10", "Arm11","Armo01", "Armo02", "Armo03", "Am-AG-1", "Am-AG-10","Am-AG-2B", "Am-AG-4B", "Am-AG-11", "Am-CT-2","Am-CT-5","Am-ATC-2" , "Am-ATC-3"]
-loci_list = ["Arm01","Arm02","Arm03","Arm04","Arm05","Arm06","Arm07","Arm08","Arm09","Arm10","Arm11","Armo01","Armo02","Armo03","Am-AG-1","Am-AG-10","Am-AG-2B","Am-AG-4B","Am-AG-11","Am-CT-5","Am-CT-2","Am-ATC-2",]
+loci_list = ["Arm01", "Arm02", "Arm03", "Arm04", "Arm05", "Arm06", "Arm07", "Arm08", "Arm09", "Arm10", "Arm11","Armo01", "Armo02", "Armo03", "Am-AG-1", "Am-AG-10","Am-AG-2B", "Am-AG-4B", "Am-AG-11","Am-CT-5","Am-ATC-2","Am-ATC-3"] 
+# loci_list = ["Arm01","Arm02","Arm03","Arm04","Arm05","Arm06","Arm07","Arm08","Arm09","Arm10","Arm11","Armo01","Armo02","Armo03","Am-AG-1","Am-AG-10","Am-AG-2B","Am-AG-4B","Am-AG-11","Am-CT-5","Am-CT-2","Am-ATC-2",]
 locus_coverage_file = "../LocusCoverageperIndividual_nSSR_FullLength.csv"
 AlleleInformation = "../AlleleInformationFile_nSSR_FullLength_ParameterSet2_sa70_sb10_m10_n20.csv"
 

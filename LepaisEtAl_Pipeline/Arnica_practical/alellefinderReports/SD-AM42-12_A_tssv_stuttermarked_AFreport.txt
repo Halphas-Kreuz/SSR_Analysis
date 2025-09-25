@@ -4,6 +4,12 @@ highest allele has only 4 reads
 Sample ./stuttermark/SD-AM42-12_A_tssv_stuttermarked is not suitable for marker Arm07:
 highest allele has only 5 reads
 
+Sample ./stuttermark/SD-AM42-12_A_tssv_stuttermarked is not suitable for marker Armo01:
+highest non-allele is 52.9% of the highest allele
+87	ALLELE	TTGCTTCTTCTCTTTATAGATGTCTACACAC(1)AG(13)CTAGTAGGAGGTGAACCCAAAATGGTAACCCGCGTTTTAA(1)
+70	ALLELE	TTGCTTCTTCTCTTTATAGATGTCTACACAC(1)AG(12)CTAGTAGGAGGTGAACCCAAAATGGTAACCCGCGTTTTAA(1)
+46	NOISE	TTGCTTCTTCTCTTTATAGATGTCTACACAC(1)AG(15)CTAGTAGGAGGTGAACCCAAAATGGTAACCCGCGTTTTAA(1)
+
 Sample ./stuttermark/SD-AM42-12_A_tssv_stuttermarked is not suitable for marker Armo02:
 highest allele has only 5 reads
 
