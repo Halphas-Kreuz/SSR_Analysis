@@ -59,7 +59,7 @@ for locus in locus_list:
             row.append(score)
         matrix.append(row)
     # Write CSV for this locus
-    output_file = f'../new_output/{locus}_SequenceComparison.csv'
+    output_file = f'../new_output/table/{locus}_SequenceComparison.csv'
     with open(output_file, 'w', newline='') as outcsv:
         writer = csv.writer(outcsv)
         writer.writerow([''] + labels)
