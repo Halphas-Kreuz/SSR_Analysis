@@ -44,6 +44,9 @@ with open('../new_output/AlleleInfo_dictionary.csv', newline='') as csvfile:
         if locus in locus_list:
             locus_to_patterns[locus].append((label, sequence))
 
+all_rows = []
+all_header = ['Locus', 'Allele1', 'Allele2', 'Value']
+
 # Step 3: For each locus, build and write the comparison matrix
 for locus in locus_list:
     # Get unique (label, sequence) pairs
@@ -62,7 +65,17 @@ for locus in locus_list:
     output_file = f'../new_output/table/{locus}_SequenceComparison.csv'
     with open(output_file, 'w', newline='') as outcsv:
         writer = csv.writer(outcsv)
-        writer.writerow([''] + labels)
-        for label, rowvals in zip(labels, matrix):
-            writer.writerow([label] + rowvals)
+        writer.writerow(['Allele1', 'Allele2', 'Value'])
+        for i, label1 in enumerate(labels):
+            for j, label2 in enumerate(labels):
+                writer.writerow([label1, label2, matrix[i][j]])
+                all_rows.append([locus, label1, label2, matrix[i][j]])
     print(f'Wrote sequence comparison matrix for {locus} to {output_file}')
+
+# Write combined output file
+combined_output_file = '../new_output/table/All_SequenceComparisons.csv'
+with open(combined_output_file, 'w', newline='') as allcsv:
+    writer = csv.writer(allcsv)
+    writer.writerow(all_header)
+    writer.writerows(all_rows)
+print(f'Wrote combined sequence comparison matrix to {combined_output_file}')
