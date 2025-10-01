@@ -26,7 +26,7 @@ X=$(grep -v "failed" ${ANALYSIS}_LocusFinalParameters.txt | cut -f9 | head -n 1)
 A=$(grep -v "failed" ${ANALYSIS}_LocusFinalParameters.txt | cut -f10 | head -n 1)
 
 
-if [ $ANALYSIS = "nSSR" ] && [ $A -gt 2 ]
+if [ $ANALYSIS = "nSSR" ] && [ $A  -gt 2 ]
 	then
 echo "Polyploid"
 

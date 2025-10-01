@@ -31,8 +31,9 @@ import sys
 
 # Default parameters
 N_SCALE = 1000
-INPUT_CSV = "AlleleInfo_named_fused.csv"
-OUTPUT_CSV = f"likelihoods_{datetime.now():%Y%m%d_%H%M%S}.csv"
+INPUT_CSV = "../new_output/AlleleInfo_named_fused.csv"
+OUTPUT_CSV = f"../new_output/likelihoods_{datetime.now():%Y%m%d_%H%M%S}.csv"
+
 
 def _validate_emissions_nonnegative(pA, pB, pD):
     if pA < 0 or pB < 0 or pD < 0:

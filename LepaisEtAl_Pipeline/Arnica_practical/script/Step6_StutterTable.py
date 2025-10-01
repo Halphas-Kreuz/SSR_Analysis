@@ -1,5 +1,6 @@
 import csv
 import re
+from pathlib import Path
 from collections import defaultdict
 
 def parse_repeat_pattern(s):
@@ -63,6 +64,8 @@ for locus in locus_list:
         matrix.append(row)
     # Write CSV for this locus
     output_file = f'../new_output/table/{locus}_SequenceComparison.csv'
+    output_path = Path(output_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_file, 'w', newline='') as outcsv:
         writer = csv.writer(outcsv)
         writer.writerow(['Allele1', 'Allele2', 'Value'])

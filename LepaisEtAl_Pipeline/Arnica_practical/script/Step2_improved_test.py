@@ -128,6 +128,8 @@ def process_sample(extrande):
 
 
 output_csv_filename = '../new_output/AlleleInfo.csv'
+output_path = Path(output_csv_filename)
+output_path.parent.mkdir(parents=True, exist_ok=True)
 
 with open(output_csv_filename, mode='w', newline='') as file:
     writer = csv.writer(file)
