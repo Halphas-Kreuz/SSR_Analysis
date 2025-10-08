@@ -23,9 +23,9 @@ def compare_patterns_asym(bench, comp):
                 diff_idx = i
         if len(diffs) == 1:
             diff = diffs[0][1]
-            if diff == 1:
+            if diff == -1:
                 return 0.5
-            elif diff == -1:
+            elif diff in [1, 2, -2]:
                 return 0.1
     return 0.0
 

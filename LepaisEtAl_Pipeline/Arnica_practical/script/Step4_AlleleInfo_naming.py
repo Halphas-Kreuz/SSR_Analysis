@@ -12,8 +12,8 @@ def load_dictionary(dict_path):
 
 def search_in_dictionary(dictionary, search_string):
     for row in dictionary:
-        if row[2] == search_string:
-            return row[0]
+        if row[3] == search_string:
+            return row[1]
     return search_string  # If not found, keep original
 
 alleleinfo_path = '../new_output/AlleleInfo.csv'
