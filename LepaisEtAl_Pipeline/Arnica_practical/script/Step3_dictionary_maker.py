@@ -87,12 +87,12 @@ if __name__ == "__main__":
     matrix = load_data(csv_path)
 
     # Example search
-    search_string = "TGTGTGTCTATATATC(1)CATA(13)CACATGTATATATAT(1)"  # Replace as needed
-    result = search_in_matrix(matrix, search_string)
-    if result:
-        print(f"Found match! The corresponding element is: {result}")
-    else:
-        print("No match found.")
+    # search_string = "TGTGTGTCTATATATC(1)CATA(13)CACATGTATATATAT(1)"  # Replace as needed
+    # result = search_in_matrix(matrix, search_string)
+    # if result:
+    #     print(f"Found match! The corresponding element is: {result}")
+    # else:
+    #     print("No match found.")
 
     # Write the new structure to a CSV file with an updated header
     with open(output_path, 'w', newline='') as outfile:

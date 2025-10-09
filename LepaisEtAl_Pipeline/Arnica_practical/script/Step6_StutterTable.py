@@ -25,7 +25,7 @@ def compare_patterns_asym(bench, comp):
             diff = diffs[0][1]
             if diff == -1:
                 return 0.5
-            elif diff in [1, 2, -2]:
+            elif diff in [1,2,-2]:
                 return 0.1
     return 0.0
 
@@ -41,7 +41,7 @@ with open('../new_output/AlleleInfo_dictionary.csv', newline='') as csvfile:
     for row in reader:
         locus = row[-1]
         label = row[0]      # Use as row/column name
-        sequence = row[1]   # Use for comparison
+        sequence = row[2]   # Use for comparison, now changed into the right column 
         if locus in locus_list:
             locus_to_patterns[locus].append((label, sequence))
 

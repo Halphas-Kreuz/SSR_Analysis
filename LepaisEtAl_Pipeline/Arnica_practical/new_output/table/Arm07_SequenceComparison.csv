@@ -1,5 +1,5 @@
 Allele1,Allele2,Value
 Arm07_101,Arm07_101,1.0
-Arm07_101,Arm07_102,1.0
-Arm07_102,Arm07_101,1.0
+Arm07_101,Arm07_102,0.0
+Arm07_102,Arm07_101,0.0
 Arm07_102,Arm07_102,1.0
