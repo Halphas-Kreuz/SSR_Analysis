@@ -1,0 +1,1 @@
+Locus 	 AlleleSequenceAnnotated 	 AlleleSeqCode 	 OccurancesAcrossIndivs 	 AlleleSequence 	 AlleleLength
