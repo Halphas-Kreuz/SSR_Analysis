@@ -30,6 +30,7 @@ OUTPUT_CSV = f"../new_output/likelihoods_AA_AB_{datetime.now():%Y%m%d_%H%M%S}.cs
 
 
 
+
 def build_error_map(error_file_path: str) -> dict:
     """
     Loads the error CSV and builds a fast, nested lookup map.
@@ -238,9 +239,12 @@ def main():
         axis=1
     )
     
-    # 6. Prepare final output DataFrame
-    output_cols = ['Loci', 'Sample', 'Allele1', 'Allele2']
+  # 6. Prepare final output DataFrame
+    # Added 'Serial' to this list
+    output_cols = ['Serial', 'Loci', 'Sample', 'Allele1', 'Allele2']
     final_df = df[output_cols].copy()
+    
+    # Add the new calculated likelihoods
     final_df['like_AA'] = results_df['like_AA']
     final_df['like_AB'] = results_df['like_AB']
     
@@ -255,7 +259,6 @@ def main():
     # 8. Save the final DataFrame to a new CSV file
     final_df.to_csv(OUTPUT_CSV, index=False)
     print(f"\nSuccess! Wrote {len(final_df)} rows to '{OUTPUT_CSV}'.")
-
 
 if __name__ == "__main__":
     main()
