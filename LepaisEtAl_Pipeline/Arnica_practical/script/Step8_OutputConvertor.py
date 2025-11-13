@@ -9,13 +9,13 @@ def clean_allele_name(raw_name):
     formats to a single 'NA' standard.
     """
     if raw_name in ["N/A", "No data", "Other sequences", "", None]:
-        return "NA"
+        return "N/A"
     
     # Check for raw sequence data (non-alphanumeric after simple cleaning)
     # and convert to NA, as it's not a simple allele name.
     # This checks if the string, after removing _ and -, is alphanumeric.
     if not raw_name.replace('_', '').replace('-', '').isalnum():
-        return "NA"
+        return "N/A"
     
     # Otherwise, return the full, original allele name
     return raw_name

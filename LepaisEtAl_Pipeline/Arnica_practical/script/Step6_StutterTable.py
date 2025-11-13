@@ -119,4 +119,4 @@ with open(combined_output_file, 'w', newline='') as allcsv:
     writer = csv.writer(allcsv)
     writer.writerow(all_header)
     writer.writerows(all_rows)
-print(f'WWrote combined sequence comparison matrix to {combined_output_file}')
+print(f'Write combined sequence comparison matrix to {combined_output_file}')
