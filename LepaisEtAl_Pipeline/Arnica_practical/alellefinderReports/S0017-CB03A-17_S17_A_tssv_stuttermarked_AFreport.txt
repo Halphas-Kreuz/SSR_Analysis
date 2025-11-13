@@ -23,5 +23,5 @@ Sample ./stuttermark/S0017-CB03A-17_S17_A_tssv_stuttermarked is not suitable for
 lowest allele has only 8 reads
 
 Sample ./stuttermark/S0017-CB03A-17_S17_A_tssv_stuttermarked is not suitable for marker MSCB31:
-lowest allele has only 5 reads
+lowest allele has only 3 reads
 

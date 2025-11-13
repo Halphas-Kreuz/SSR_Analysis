@@ -13,6 +13,9 @@ lowest allele has only 13 reads
 Sample ./stuttermark/S0008-CB04B-25_S8_A_tssv_stuttermarked is not suitable for marker MSCB22:
 lowest allele has only 12 reads
 
+Sample ./stuttermark/S0008-CB04B-25_S8_A_tssv_stuttermarked is not suitable for marker MSCB24:
+lowest allele has only 10 reads
+
 Sample ./stuttermark/S0008-CB04B-25_S8_A_tssv_stuttermarked is not suitable for marker MSCB32:
 highest allele has only 6 reads
 

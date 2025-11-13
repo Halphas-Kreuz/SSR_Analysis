@@ -3,11 +3,20 @@ import os
 import json
 from pathlib import Path
 import re
+import sys  # Import sys to read command-line arguments
 
-#parameter part 
+# --- Parameter Part ---
+
+# Get 'n' from command line, default to 2
+try:
+    # sys.argv[0] is the script name, sys.argv[1] is the first arg
+    N_LINES_TO_PROCESS = int(sys.argv[1])
+except (IndexError, ValueError):
+    N_LINES_TO_PROCESS = 2 # Default to 2 if no argument is given
+
+print(f"✅ Processing the top {N_LINES_TO_PROCESS} candidates for each locus.")
 
 folder_path = '../filtered_results/filtered_tssvResults'
-# loci_list = ["Arm01", "Arm02", "Arm03", "Arm04", "Arm05", "Arm06", "Arm07", "Arm08", "Arm09", "Arm10", "Arm11","Armo01", "Armo02", "Armo03", "Am-AG-1", "Am-AG-10","Am-AG-2B", "Am-AG-4B", "Am-AG-11","Am-CT-5","Am-ATC-2","Am-ATC-3"] 
 with open ('../nSSR_LocusList.txt', 'r') as f:
     loci_list = [line.strip() for line in f if line.strip()]
 locus_coverage_file = "../LocusCoverageperIndividual_nSSR_FullLength.txt"
@@ -28,7 +37,7 @@ def extract_names_from_folder(folder_path):
 sample_list = extract_names_from_folder(folder_path)
 
 
-def process_sample(extrande):
+def process_sample(extrande, num_lines_to_keep):
     def search_folder(folder_path, keyword):
         for file_name in os.listdir(folder_path):
             if keyword in file_name and file_name.endswith('.csv'):
@@ -58,32 +67,24 @@ def process_sample(extrande):
         return None
 
     score_column = search_column(score_matrix, extrande)
-    #if the count is < 0.25, then drop it 
     if not score_column or len(score_column) < 2:
         return f"Invalid score column data for {extrande}"
-
-    # def delete_lines_with_keyword(matrix, keyword="Other sequence"):
-    #     return [row for row in matrix if all(keyword not in element for element in row)]
     
-    # cleaned_sample_matrix = delete_lines_with_keyword(sample_file)
-    
-    def select_loci(sample_file, loci): 
+    def select_loci(sample_file, loci, n): 
         loci_rows = [row for row in sample_file if row and row[0] == loci]
-        return [(row[1], row[2]) for row in loci_rows[:2]]  # Extract first two candidates
+        # Use the 'n' parameter here instead of hardcoded :2
+        return [(row[1], row[2]) for row in loci_rows[:n]]
 
     def PercentNumber(sample_name, loci):
         try:
-            # Map locus name to index in loci_list
             get_locus_index = lambda locus_name: loci_list.index(locus_name) + 1
 
-            # Select loci data
-            # loci_data = select_loci(cleaned_sample_matrix, loci)
-            loci_data = select_loci(sample_file, loci)
+            # Pass the number of lines to select_loci
+            loci_data = select_loci(sample_file, loci, num_lines_to_keep)
 
             if len(loci_data) == 0:
                 return {loci: "Insufficient loci data"}
 
-            # Get the score column value for the locus
             locus_index = get_locus_index(loci)
             if locus_index >= len(score_column) or not score_column[locus_index].strip().isdigit():
                 return {loci: "Invalid score column data"}
@@ -92,36 +93,27 @@ def process_sample(extrande):
             if locus_score == 0:
                 locus_score = 1
 
-            # Process first candidate
-            candidate1 = loci_data[0]
-            first_percent = round(int(candidate1[1]) / locus_score, 3)
+            # --- Process ALL candidates found (up to n) ---
+            candidates_list = []
+            for candidate in loci_data:
+                try:
+                    percent = round(int(candidate[1]) / locus_score, 3)
+                    # Store as a tuple: (sequence, length, frequency)
+                    candidates_list.append((candidate[0], len(candidate[0]), percent))
+                except ValueError:
+                    # Handle case where candidate[1] is not a number
+                    candidates_list.append((candidate[0], len(candidate[0]), "N/A"))
+            
+            # Return the whole list of candidates
+            return {loci: candidates_list}
 
-            if len(loci_data) == 1:
-                return {loci: {"first_candidate": (candidate1[0], len(candidate1[0]), first_percent)}}
-
-            # Process second candidate
-            candidate2 = loci_data[1]
-            second_percent = round(int(candidate2[1]) / locus_score, 3)
-
-            return {
-                loci: {
-                    "first_candidate": (candidate1[0], len(candidate1[0]), first_percent),
-                    "second_candidate": (candidate2[0], len(candidate2[0]), second_percent),
-                }
-            }
         except (ValueError, IndexError) as e:
             return {loci: f"Error processing loci data: {str(e)}"}
     
     results = {}
-    print(f"--- Processing sample {extrande} ---") # Add this
-    print(f"Initial size of cleaned matrix: {len(sample_file)}") # Add this
-
-
     for loci in loci_list:
-        print(f"Locus: {loci}, Matrix size: {len(sample_file)}") # Add this
         results.update(PercentNumber(extrande, loci))
         
-    # return json.dumps(results, indent=4)
     return results
 
 
@@ -133,35 +125,60 @@ output_path.parent.mkdir(parents=True, exist_ok=True)
 with open(output_csv_filename, mode='w', newline='') as file:
     writer = csv.writer(file)
 
-    # Write header
-    writer.writerow(["Serial", "Sample", "Loci", "Allele1", "Allele2", "Frequency1", "Frequency2"])
+    # --- (MODIFICATION 1) ---
+    # --- Write DYNAMIC grouped header ---
+    header = ["Serial", "Sample", "Loci"]
+    # First, add all Allele columns
+    for i in range(1, N_LINES_TO_PROCESS + 1):
+        header.append(f"Allele{i}")
+    # Second, add all Frequency columns
+    for i in range(1, N_LINES_TO_PROCESS + 1):
+        header.append(f"Frequency{i}")
+    writer.writerow(header)
+    # --- (END MODIFICATION 1) ---
 
     serial = 1  # Serial number starts at 1
 
     for i in range(len(sample_list)):
         sample_name = sample_list[i]
-        data = process_sample(sample_name)
+        # Pass N_LINES_TO_PROCESS to the function
+        data = process_sample(sample_name, N_LINES_TO_PROCESS)
 
         if isinstance(data, str):  # Handle error messages
             print(data)
             continue
 
         for loci, candidates in data.items():
-            if isinstance(candidates, str):  # Handle insufficient loci data
-                writer.writerow([serial, sample_name, loci, "N/A", "N/A", "N/A", "N/A"])
+            # Base row
+            row_data = [serial, sample_name, loci]
+            
+            alleles_list = []
+            freqs_list = []
+
+            if isinstance(candidates, str):  # Handle insufficient loci data or errors
+                # Fill all allele/freq columns with N/A
+                alleles_list = ["N/A"] * N_LINES_TO_PROCESS
+                freqs_list = ["N/A"] * N_LINES_TO_PROCESS
             else:
-                # Extract allele 1 details
-                allele1_seq, allele1_length, allele1_freq = candidates["first_candidate"]
+                # 'candidates' is now a list of tuples: (seq, length, freq)
+                for candidate_tuple in candidates:
+                    alleles_list.append(candidate_tuple[0]) # Allele Seq
+                    freqs_list.append(candidate_tuple[2])   # Frequency
+                
+                # Pad with "N/A" if fewer than N_LINES candidates were found
+                while len(alleles_list) < N_LINES_TO_PROCESS:
+                    alleles_list.append("N/A")
+                    freqs_list.append("N/A")
 
-                # Extract allele 2 details if present
-                if "second_candidate" in candidates:
-                    allele2_seq, allele2_length, allele2_freq = candidates["second_candidate"]
-                else:
-                    allele2_seq, allele2_length, allele2_freq = "N/A", "N/A", "N/A"
-
-                # Write row to CSV
-                writer.writerow([serial, sample_name, loci, allele1_seq, allele2_seq, allele1_freq, allele2_freq])
-
+            # --- (MODIFICATION 2) ---
+            # Add all alleles first
+            row_data.extend(alleles_list)
+            # Then add all frequencies
+            row_data.extend(freqs_list)
+            # --- (END MODIFICATION 2) ---
+            
+            # Write the complete dynamic row
+            writer.writerow(row_data)
             serial += 1  # Increment serial number
 
     print(f"CSV file '{output_csv_filename}' created successfully!")

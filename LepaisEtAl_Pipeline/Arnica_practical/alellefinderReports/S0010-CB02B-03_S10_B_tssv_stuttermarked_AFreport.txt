@@ -4,6 +4,9 @@ highest allele has only 2 reads
 Sample ./stuttermark/S0010-CB02B-03_S10_B_tssv_stuttermarked is not suitable for marker MSCB06:
 highest allele has only 19 reads
 
+Sample ./stuttermark/S0010-CB02B-03_S10_B_tssv_stuttermarked is not suitable for marker MSCB15:
+lowest allele has only 5 reads
+
 Sample ./stuttermark/S0010-CB02B-03_S10_B_tssv_stuttermarked is not suitable for marker MSCB16:
 highest allele has only 8 reads
 

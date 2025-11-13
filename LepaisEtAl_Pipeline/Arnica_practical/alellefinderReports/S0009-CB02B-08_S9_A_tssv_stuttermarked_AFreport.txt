@@ -5,7 +5,7 @@ Sample ./stuttermark/S0009-CB02B-08_S9_A_tssv_stuttermarked is not suitable for 
 highest allele has only 2 reads
 
 Sample ./stuttermark/S0009-CB02B-08_S9_A_tssv_stuttermarked is not suitable for marker MSCB09:
-lowest allele has only 5 reads
+lowest allele has only 3 reads
 
 Sample ./stuttermark/S0009-CB02B-08_S9_A_tssv_stuttermarked is not suitable for marker MSCB13:
 highest allele has only 2 reads
