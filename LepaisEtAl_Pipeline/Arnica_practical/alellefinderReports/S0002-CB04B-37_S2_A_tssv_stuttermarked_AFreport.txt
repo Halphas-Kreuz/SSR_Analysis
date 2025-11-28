@@ -1,9 +1,0 @@
-Sample ./stuttermark/S0002-CB04B-37_S2_A_tssv_stuttermarked is not suitable for marker MSCB07:
-highest allele has only 3 reads
-
-Sample ./stuttermark/S0002-CB04B-37_S2_A_tssv_stuttermarked is not suitable for marker MSCB18:
-highest allele has only 3 reads
-
-Sample ./stuttermark/S0002-CB04B-37_S2_A_tssv_stuttermarked is not suitable for marker MSCB23:
-highest allele has only 11 reads
-

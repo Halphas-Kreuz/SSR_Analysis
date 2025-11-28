@@ -1,0 +1,24 @@
+Sample ./stuttermark/S0012-CB01C-02_S12_L001_M_001_tssv_stuttermarked is not suitable for marker MSCB04:
+highest allele has only 17 reads
+
+Sample ./stuttermark/S0012-CB01C-02_S12_L001_M_001_tssv_stuttermarked is not suitable for marker MSCB13:
+highest allele has only 14 reads
+
+Sample ./stuttermark/S0012-CB01C-02_S12_L001_M_001_tssv_stuttermarked is not suitable for marker MSCB15:
+highest allele has only 17 reads
+
+Sample ./stuttermark/S0012-CB01C-02_S12_L001_M_001_tssv_stuttermarked is not suitable for marker MSCB17:
+lowest allele has only 4 reads
+
+Sample ./stuttermark/S0012-CB01C-02_S12_L001_M_001_tssv_stuttermarked is not suitable for marker MSCB22:
+lowest allele has only 5 reads
+
+Sample ./stuttermark/S0012-CB01C-02_S12_L001_M_001_tssv_stuttermarked is not suitable for marker MSCB24:
+lowest allele has only 4 reads
+
+Sample ./stuttermark/S0012-CB01C-02_S12_L001_M_001_tssv_stuttermarked is not suitable for marker MSCB32:
+highest allele has only 12 reads
+
+Sample ./stuttermark/S0012-CB01C-02_S12_L001_M_001_tssv_stuttermarked is not suitable for marker MSCB38:
+lowest allele has only 12 reads
+
