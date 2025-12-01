@@ -9,7 +9,7 @@ import sys  # Import sys to read command-line arguments
 
 # Defaults
 N_ALLELES = 2
-MODE_INPUT = 'genalex'
+MODE_INPUT = 'human'
 
 # Map modes to Column Indices based on your dictionary
 # Index 1: Human_ID, Index 2: GenAlEx_ID, Index 3: Original_AlleleSeqCode

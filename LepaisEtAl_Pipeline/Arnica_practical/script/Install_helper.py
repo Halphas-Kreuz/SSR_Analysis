@@ -1,55 +1,14 @@
 import subprocess
 import sys
+import time
 import os
 
-# --- Helper Function ---
-def run_command(command, step_name):
-    """
-    Runs a shell command and checks for errors.
-    If an error occurs, it prints a message and exits the script.
-    """
-    print(f"\n--- Starting: {step_name} ---")
-    print(f"Running command: {command}")
-    
-    try:
-        # Run the command.
-        # check=True: This is CRITICAL. It makes the script automatically
-        #              fail if the command returns a non-zero exit code.
-        # shell=True: Allows us to pass the command as a single string.
-        # text=True:  Shows output as text (not bytes).
-        subprocess.run(
-            command, 
-            shell=True, 
-            check=True, 
-            text=True, 
-            stdout=sys.stdout, 
-            stderr=sys.stderr
-        )
-        
-        print(f"--- Finished: {step_name} ---")
-        
-    except subprocess.CalledProcessError as e:
-        print(f"\n**************************************************")
-        print(f"ERROR: Step '{step_name}' FAILED!")
-        print(f"Failed Command: {e.cmd}")
-        print(f"Return Code: {e.returncode}")
-        print("**************************************************")
-        
-        # Exit the entire helper script. We don't want to continue
-        # if a step in the pipeline failed.
-        sys.exit(1)
-
-# ===================================================================
-# --- MAIN PIPELINE SCRIPT ---
-# ===================================================================
-
-def main():
+def run_pipeline():
     print("=======================================")
     print("  Starting Analysis Pipeline Helper  ")
     print("=======================================")
 
-    # --- Check Data Naming ---
-    # We ask the user if the data is already clean.
+    # --- 1. Check Data Naming ---
     data_is_clean = False
     while True:
         user_input = input("Are your data files already named correctly? (y/n): ").strip().lower()
@@ -62,13 +21,11 @@ def main():
         else:
             print("Invalid input. Please enter 'y' or 'n'.")
 
-    # --- Get Ploidy Number ---
-    # We ask the user for the ploidy number and make sure it's a valid integer.
+    # --- 2. Get Ploidy Number ---
     ploidy_number = None
     while True:
         user_input = input("Please enter the ploidy number (e.g., 2): ").strip()
         try:
-            # Convert the input to an integer
             ploidy_number = int(user_input)
             if ploidy_number > 0:
                 print(f"Ploidy set to: {ploidy_number}")
@@ -78,7 +35,25 @@ def main():
         except ValueError:
             print("Invalid input. Please enter a whole number.")
 
-    # --- Define and Run the Pipeline ---
+    # --- 3. Get Mode (Default to human) ---
+    mode = 'human'
+    while True:
+        user_input = input("Select naming mode [human/genalex/original] (default: human): ").strip().lower()
+        if user_input == '':
+            mode = 'human'
+            break
+        elif user_input in ['human', 'genalex', 'original']:
+            mode = user_input
+            break
+        else:
+            print("Invalid mode. Please choose 'human', 'genalex', or 'original'.")
+    print(f"Mode set to: {mode}")
+
+    print("\n---------------------------------------")
+    print(" Initializing Pipeline...")
+    print("---------------------------------------")
+
+    # --- Define Pipeline Steps ---
     
     # This is the list of commands to run, in order.
     pipeline_steps = []
@@ -90,82 +65,110 @@ def main():
             "command": "python3 Step0_NameCleaning.py"
         })
     else:
-        print("\nSkipping Step 0 (Name Cleaning) as requested.")
+        print(" Skipping Step 0 (Name Cleaning) as requested.")
 
-    # --- Sequential Pipeline Steps ---
-    #
-    # !!! IMPORTANT !!!
-    # You MUST edit the paths and script names below to match
-    # your actual file structure.
-    #
-    
-    # --- Step 1
+    # --- Step 1: Filter lines (Bash script)
+    # Ensure Step1_filter_2_line.sh exists and is executable
     pipeline_steps.append({
-        "name": "Step 1: filter the necessary line",
+        "name": "Step 1: Filter necessary lines (Bash)",
         "command": f"bash Step1_filter_2_line.sh {ploidy_number}"
     })
     
-    # --- Step 2
+    # --- Step 2: Database generation
     pipeline_steps.append({
-        "name": "Step 2: database generation",
+        "name": "Step 2: Database Generation",
         "command": f"python3 Step2_improved_generator.py {ploidy_number}"
     })
 
-    # --- Step 3:
+    # --- Step 3: Dictionary Creation
     pipeline_steps.append({
-        "name": "Step 3: write the dictionary",
+        "name": "Step 3: Dictionary Creation",
         "command": "python3 Step3_dictionary_maker.py"
     })
 
-    # --- Step 4
+    # --- Step 4 (Pass 1): Initial Naming
     pipeline_steps.append({
-        "name": "Step 4: Alleleinfo naming ",
-        "command": f"python3 Step4_AlleleInfo_naming.py {ploidy_number}"
+        "name": "Step 4 (Pass 1): Initial Naming",
+        "command": f"python3 Step4_AlleleInfo_naming.py {ploidy_number} {mode}"
     })
+
+    # --- Step 3b: Dictionary Patcher
+    pipeline_steps.append({
+        "name": "Step 3b: Dictionary Patcher",
+        "command": f"python3 Step3b_dictionary_patcher.py {mode}"
+    })
+
+    # --- Step 4 (Pass 2): Final Naming
+    pipeline_steps.append({
+        "name": "Step 4 (Pass 2): Final Naming",
+        "command": f"python3 Step4_AlleleInfo_naming.py {ploidy_number} {mode}"
+    })
+
+    # --- Step 5: GeneTable Conversion
+    pipeline_steps.append({
+        "name": "Step 5: Unique GeneTable",
+        "command": f"python3 Step5_GeneTable_unique.py {mode}"
+    })
+
+    # --- Step 6: Stutter Table Calculation
+    pipeline_steps.append({
+        "name": "Step 6: Stutter Table",
+        "command": f"python3 Step6_StutterTable.py 0.5 0.1 {mode}"
+    })
+
+    # --- Step 6a: Bayesian Predecessor
+    pipeline_steps.append({
+        "name": "Step 6a: Bayesian Predecessor",
+        "command": f"python3 Step6a_BayesianPredecessor.py {mode}"
+    })
+
+    # --- Step 7: Bayesian Likelihoods
+    pipeline_steps.append({
+        "name": "Step 7: Bayesian Genotype Likelihoods",
+        "command": f"python3 Step7_bayesianMultiploidy.py {ploidy_number} {mode}"
+    })
+
+    # --- Step 8: Final Output Conversion
+    pipeline_steps.append({
+        "name": "Step 8: Final Output Converter",
+        "command": f"python3 Step8_OutputConvertor.py {ploidy_number} {mode}"
+    })
+
+    # ==========================================
+    # 🏃 EXECUTION LOOP
+    # ==========================================
     
-    # --- Step 5: 
-    pipeline_steps.append({
-        "name": "Step 5: Old Genetype table translation ",
-        "command": "python3 Step5_GeneTable_unique.py"
-    })
+    total_start_time = time.time()
 
-    # --- Step 6: 
-    pipeline_steps.append({
-        "name": "Step 6: Stutter Table construction",
-        "command": "python3 Step6_StutterTable.py"
-    })
-
-    # --- Step 7:
-    pipeline_steps.append({
-        "name": "Step 6a: preparation for the final bayesian calculation",
-        "command": "python3 Step6a_BayesianPredecessor.py"
-    })
-
-    # --- Step 8:
-    pipeline_steps.append({
-        "name": "Step 7: bayesian",
-        "command": f"python3 Step7_bayesianMultiploidy.py {ploidy_number}"
-    })
-
-    # --- Step 9
-    pipeline_steps.append({
-        "name": "Step 8: output formatting",
-        "command": f"python3 Step8_OutputConvertor.py {ploidy_number}"
-    })
-
-
-    # --- Execute the Pipeline ---
-    # Now, we loop through our defined steps and run them one by one.
     for step in pipeline_steps:
-        run_command(step["command"], step["name"])
+        step_name = step["name"]
+        cmd_str = step["command"]
+        
+        print(f"\n🔹 [Running] {step_name}...")
+        # print(f"   Command: {cmd_str}") # Uncomment for debugging
+        
+        step_start = time.time()
+        try:
+            # shell=True allows running simple string commands like "bash script.sh arg"
+            subprocess.run(cmd_str, shell=True, check=True)
+            
+            elapsed = time.time() - step_start
+            print(f"✅ [Success] {step_name} ({elapsed:.2f}s)")
+            
+        except subprocess.CalledProcessError:
+            print(f"\n❌ [FAILED] Pipeline stopped at: {step_name}")
+            print("   Please check the error message above.")
+            sys.exit(1)
+        except Exception as e:
+            print(f"\n❌ [ERROR] Unexpected error at {step_name}: {e}")
+            sys.exit(1)
 
-    # --- Finish ---
-    print("\n=======================================")
-    print("  Pipeline Completed Successfully!  ")
-    print("=======================================")
+    total_elapsed = time.time() - total_start_time
+    print(f"\n==================================================")
+    print(f"   PIPELINE COMPLETE SUCCESSFULLY!")
+    print(f"   Total Time: {total_elapsed:.2f}s")
+    print(f"   Final Output: ../new_output/final_genotypes_Ploidy{ploidy_number}_{mode}.txt")
+    print(f"==================================================")
 
-
-# This makes sure the `main()` function is called when
-# you run: python pipeline_helper.py
 if __name__ == "__main__":
-    main()
+    run_pipeline()
