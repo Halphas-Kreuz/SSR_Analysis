@@ -21,9 +21,8 @@ filter_files() {
   for data_file in "$input_folder"/*.txt; do
     # Get the base name of the file (e.g., "A.txt" -> "A")
     base_name=$(basename "$data_file" .txt)
-    
-    # Create the output file name with "_filtered" appended
-    output_file="$output_folder/${base_name}_filtered.txt"
+    base_name=${base_name%_tssv}
+    output_file="$output_folder/${base_name}.txt"
 
     # Clear the output file if it exists, to avoid appending
     > "$output_file"
@@ -35,7 +34,6 @@ filter_files() {
     done < "$names_file"
   done
 }
-
 # automatically convert everything 
 convert_txt_to_csv() {
   local folder="../filtered_results/$(basename "$1")"

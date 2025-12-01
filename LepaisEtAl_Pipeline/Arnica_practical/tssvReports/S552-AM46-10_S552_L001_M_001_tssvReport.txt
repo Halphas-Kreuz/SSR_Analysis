@@ -1,0 +1,27 @@
+marker	unique_seqs	tPaired	fPaired	rPaired	tLeft	fLeft	rLeft	tRight	fRight	rRight
+Am-AG-1	0	0	0	0	0	0	0	0	0	0
+Am-AG-10	0	0	0	0	0	0	0	0	0	0
+Am-AG-11	0	0	0	0	0	0	0	0	0	0
+Am-AG-2B	0	0	0	0	0	0	0	0	0	0
+Am-AG-4B	0	0	0	0	0	0	0	0	0	0
+Am-ATC-2	0	0	0	0	0	0	0	0	0	0
+Am-ATC-3	0	0	0	0	0	0	0	0	0	0
+Am-CT-2	0	0	0	0	0	0	0	0	0	0
+Am-CT-5	0	0	0	0	0	0	0	0	0	0
+Arm01	33	505	505	0	559	558	1	537	537	0
+Arm02	0	0	0	0	0	0	0	0	0	0
+Arm03	62	525	525	0	535	535	0	551	551	0
+Arm04	98	925	925	0	981	981	0	959	959	0
+Arm05	0	0	0	0	0	0	0	0	0	0
+Arm06	53	426	426	0	460	460	0	458	458	0
+Arm07	1	2	2	0	2	2	0	257	257	0
+Arm08	35	557	557	0	796	796	0	559	559	0
+Arm09	0	0	0	0	0	0	0	0	0	0
+Arm10	0	0	0	0	0	0	0	0	0	0
+Arm11	29	595	595	0	597	597	0	596	596	0
+Armo01	0	0	0	0	0	0	0	0	0	0
+Armo02	0	0	0	0	0	0	0	0	0	0
+Armo03	0	0	0	0	0	0	0	0	0	0
+
+total reads	3952
+unrecognised reads	0

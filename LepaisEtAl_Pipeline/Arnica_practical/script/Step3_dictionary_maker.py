@@ -1,105 +1,155 @@
 import csv
 import os
+import sys
+import glob
+
+# --- Configuration ---
+# Match any AlleleInformationFile txt
+DEFAULT_INPUT_PATTERN = '../AlleleInformationFile_*.txt'
+OUTPUT_FILE = '../new_output/AlleleInfo_dictionary.csv'
 
 def txt_to_csv(txt_path, csv_path):
-    """Converts a tab-delimited text file to a CSV file if it doesn't already exist."""
+    """Converts a tab-delimited text file to a CSV file."""
     if not os.path.exists(csv_path):
-        with open(txt_path, 'r') as infile, open(csv_path, 'w', newline='') as outfile:
-            reader = csv.reader(infile, delimiter='\t')
-            writer = csv.writer(outfile)
-            for row in reader:
-                writer.writerow(row)
-        print(f"Converted {txt_path} to {csv_path}")
+        try:
+            with open(txt_path, 'r') as infile, open(csv_path, 'w', newline='') as outfile:
+                reader = csv.reader(infile, delimiter='\t')
+                writer = csv.writer(outfile)
+                for row in reader:
+                    writer.writerow(row)
+            print(f"✅ Converted {txt_path} to {csv_path}")
+        except Exception as e:
+            print(f"❌ Error converting TXT to CSV: {e}")
+            sys.exit(1)
+    else:
+        print(f"ℹ️  CSV file already exists: {csv_path}")
 
-def load_data(csv_path):
-    """Loads data from CSV, transforms it by adding a new fused ID column, and ensures its uniqueness."""
-    with open(csv_path, 'r') as file2:
-        reader2 = csv.reader(file2)
-        table2 = [row for row in reader2]
-        data_rows = table2[1:]  # Skip the header row
-
-    matrix = []
-    # Dictionary to track the count of each ID to handle duplicates
-    id_counts = {}
-
-    for row in data_rows:
-        if len(row) >= 5:  # Ensure the original row has sufficient columns
-            # Original fused index from column 1 and 3 of the input file
-            fused_index = f"{row[0]}_{row[2]}"
-
-            # --- NEW FEATURE LOGIC ---
-            # Calculate the length of the 5th column (index 4)
-            len_col5 = len(row[4])
-            # Create the base for the new fused ID from the 1st column (index 0) and the calculated length
-            base_new_fused_id = f"{row[0]}_{len_col5}"
-
-            # Check for duplicates and create a unique ID
-            if base_new_fused_id in id_counts:
-                # If the ID already exists, increment its count
-                id_counts[base_new_fused_id] += 1
-                # Append the count to make the ID unique (e.g., Arm03_131_2)
-                unique_new_fused_id = f"{base_new_fused_id}_{id_counts[base_new_fused_id]}"
-            else:
-                # If it's the first time seeing this ID, initialize its count to 1
-                id_counts[base_new_fused_id] = 1
-                # The first instance of the ID does not get a suffix
-                unique_new_fused_id = base_new_fused_id
-            # --- END NEW FEATURE LOGIC ---
-
-            # Assemble the new row, inserting the unique_new_fused_id as the second element
-            output_row = [
-                fused_index,         # 1st column: e.g., Arm03_103
-                unique_new_fused_id, # 2nd column (NEW & UNIQUE): e.g., Arm03_131 or Arm03_131_2
-                row[1],              # 3rd column: The long TGTGT... string
-                row[4],              # 4th column: The other long TGTGT... string
-                len_col5,            # 5th column: The length, e.g., 131
-                row[0]               # 6th column: The original first part, e.g., Arm03
-            ]
-            matrix.append(output_row)
-    return matrix
-
-def search_in_matrix(matrix, search_string):
+def load_and_transform_data(csv_path):
     """
-    Searches for a string. NOTE: Indices are shifted due to the new column.
-    The search now compares against the 3rd and 4th columns of the output.
+    Loads data and creates THREE naming conventions, plus preserves the Annotated Sequence.
+    Input Columns based on user sample:
+    0: Locus
+    1: AlleleSequenceAnnotated (e.g., ...CATA(13)...) -> WE NEED THIS
+    2: AlleleSeqCode (Original ID)
+    3: Occurances
+    4: AlleleSequence (Full)
+    5: AlleleLength
     """
-    for row in matrix:
-        if len(row) >= 4:
-            # Check against the new column indices for the searchable strings
-            if row[2] == search_string:
-                return row[3]
-            elif row[3] == search_string:
-                return row[1]
-    return None
+    try:
+        with open(csv_path, 'r') as file:
+            reader = csv.reader(file)
+            table = [row for row in reader]
+            
+        if not table:
+            return []
+
+        # Skip header if it exists
+        data_rows = table[1:] 
+
+        matrix = []
+        # Dictionary to track ID occurrences: Key = "LocusName_Length"
+        id_counts = {}
+
+        for row in data_rows:
+            # Ensure row has required columns
+            if len(row) >= 5:
+                locus_name = row[0]
+                annotated_seq = row[1] # <--- NEW: Extract Annotated Sequence
+                original_id = row[2] 
+                sequence = row[4]
+                
+                # Calculate or get length
+                # Using python len() is safer than trusting the file column if it varies
+                seq_length = len(sequence) 
+                
+                # --- The Logic for 3 IDs ---
+                
+                # Base Key for counting duplicates (e.g. "Arm11_110")
+                base_key = f"{locus_name}_{seq_length}"
+
+                if base_key in id_counts:
+                    id_counts[base_key] += 1
+                    count = id_counts[base_key]
+                    
+                    # 1. Human ID: Arm11_110_2
+                    human_id = f"{locus_name}_{seq_length}_{count}"
+                    
+                    # 2. GenAlEx ID: 110.2
+                    genalex_id = f"{seq_length}.{count}"
+                    
+                else:
+                    id_counts[base_key] = 1
+                    count = 1
+                    
+                    # 1. Human ID: Arm11_110
+                    human_id = f"{locus_name}_{seq_length}"
+                    
+                    # 2. GenAlEx ID: 110
+                    genalex_id = f"{seq_length}"
+
+                # Key used to match Step 2 data
+                fused_index = f"{locus_name}_{original_id}"
+
+                # Assemble Output Row
+                output_row = [
+                    fused_index,   # 0
+                    human_id,      # 1
+                    genalex_id,    # 2
+                    original_id,   # 3
+                    sequence,      # 4
+                    annotated_seq, # 5 <--- NEW: Inserted here
+                    seq_length,    # 6
+                    locus_name     # 7
+                ]
+                matrix.append(output_row)
+        
+        return matrix
+
+    except Exception as e:
+        print(f"❌ An error occurred: {e}")
+        return []
 
 if __name__ == "__main__":
-    txt_path = '../AlleleInformationFile_nSSR_FullLength_ParameterSet1_sa50_sb10_m15_n20.txt'
-    csv_path = '../AlleleInformationFile_nSSR_FullLength_ParameterSet1_sa50_sb10_m15_n20.csv'
-    output_path = '../new_output/AlleleInfo_dictionary.csv'
+    # 1. Find Input
+    found_files = glob.glob(DEFAULT_INPUT_PATTERN)
+    if not found_files:
+        print(f"❌ No input file found matching: {DEFAULT_INPUT_PATTERN}")
+        sys.exit(1)
+    
+    txt_path = found_files[0]
+    csv_path = txt_path.replace('.txt', '.csv')
 
-    # Ensure the output directory exists
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-
-    # Convert TXT to CSV if needed
+    # 2. Convert
+    # Note: If the CSV already exists from a previous run but is 'bad', 
+    # we might want to force regenerate it. But strictly strictly speaking, 
+    # the python script reads the CSV. If you updated the TXT, delete the old CSV first.
+    if os.path.exists(csv_path):
+        os.remove(csv_path) # Force remove old CSV to ensure fresh conversion
+        
+    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
     txt_to_csv(txt_path, csv_path)
 
-    # Load data from CSV with the new transformation logic
-    matrix = load_data(csv_path)
+    # 3. Process
+    print(f"⚙️  Processing dictionary from {txt_path}...")
+    matrix = load_and_transform_data(csv_path)
 
-    # Example search
-    # search_string = "TGTGTGTCTATATATC(1)CATA(13)CACATGTATATATAT(1)"  # Replace as needed
-    # result = search_in_matrix(matrix, search_string)
-    # if result:
-    #     print(f"Found match! The corresponding element is: {result}")
-    # else:
-    #     print("No match found.")
-
-    # Write the new structure to a CSV file with an updated header
-    with open(output_path, 'w', newline='') as outfile:
-        writer = csv.writer(outfile)
-        # Update header to include the new column
-        writer.writerow(['Fused_Index', 'Arm_Length_ID', 'Column2', 'Column5', 'Len_Column5', 'Original_Column0'])
-        writer.writerows(matrix)
-
-    print(f"Modified dictionary CSV file saved to {output_path}")
-
+    # 4. Write Output
+    if matrix:
+        with open(OUTPUT_FILE, 'w', newline='') as outfile:
+            writer = csv.writer(outfile)
+            # Updated Header
+            writer.writerow([
+                'Fused_Index', 
+                'Human_ID', 
+                'GenAlEx_ID', 
+                'Original_AlleleSeqCode', 
+                'Full_Sequence', 
+                'Repeat_Pattern', # <--- NEW Header
+                'Length', 
+                'Locus_Name'
+            ])
+            writer.writerows(matrix)
+        print(f"✅ Dictionary created: {OUTPUT_FILE}")
+        print("   -> Added column: Repeat_Pattern")
+    else:
+        print("⚠️  No data processed.")

@@ -1,0 +1,223 @@
+; Lines beginning with a semicolon (;) are ignored by FDSTools.
+
+[aliases]
+; Assign an explicit allele name to a specific sequence of a specific marker.
+; Specify three comma-separated values: marker name, sequence, and allele name.
+; You may use the alias name in the flanks, prefix, and suffix sections to
+; specify them for this allele specifically. You cannot specify a repeat
+; structure for an alias.
+; AmelX    = Amel, GAT, X
+; AmelY    = Amel, AATAAAGTG, Y
+
+[flanks]
+; The flanking sequences (e.g., primer sequences) of each marker. Specify two
+; comma-separated values: left flank and right flank, in the same sequence
+; orientation (strand).
+MSCB01    =  ACAGGGAGAAGTGCTACAAGA, GCGGAGTTTGTTACCCGAGA
+MSCB02    =  TCGAAGACTGTGCAGTGCG, GGAAGGATACGCTCGCCATT
+MSCB03    =  AAGCAGTTGCAGTTGAACGC, GAGGAGATAGGCGAGGACCT
+MSCB04    =  GGTTGAACTGTTGCTCTGACC, TGCCTCAAGACTTCCAAAGCT
+MSCB05    =  CCTTGTCCCAGGCAAAGGAT, CCGACGCTTCAGTCATACCA
+MSCB06    =  TCTTGCACCTCCCACAACTG, ACTGGGTTGAGCTCGATCAG
+MSCB07    =  GCCATAGACCCAGCTGATGA, CCTTGCTGGGCAGAATAGCT
+MSCB08    =  TGCAGGTTAATGATGGGAGGT, GTTCTGTCCTCCTCATTCCTCA
+MSCB09    =  TCCGCTCTCCTGATCTCCTC, ATGAATTCCACGGCGATTGC
+MSCB10    =  CTGCAGGTTAATGATGGGAGGT, GTTCTGTCCTCCTCATTCCTCA
+MSCB11    =  AGATTGGACAACTTGGCGTC, TCAACTGGCCACAATTAGGC
+MSCB12    =  TGAAGATGAGCTTATGGGTGGT, GGGCAACAACCAACTTCTGTC
+MSCB13    =  TGGGAAGCGGTCTCTTGATC, TGAAGATGCCATTTCTTGCACA
+MSCB14    =  CCACACTACCCGCTGAAAGT, GGAGGAAGTTGATGAGGAGCA
+MSCB15    =  ATGCTAACTTCATGTGCCCT, CGTCTGGTCCAACTGTTAATGG
+MSCB16    =  TCGCTTCTCCTTGGCTGAAG, ACTGCAGAATGGTCAACTCACA
+MSCB17    =  TCCATTGGATCTTCGCCGAG, TCTTGCATGAGTTACGGTAGGT
+MSCB18    =  GGGTATCCAAAGCTCCTTCTCC, CTTGCGCGGTCTGATTGATC
+MSCB19    =  AGGTCCTCGCCTATCTCCTC, GCGTTCAACTGCAACTGCTT
+MSCB20    =  AGGAGGGACAACATACGTACAG, TGAGATCAGTACGTAGATGGCG
+MSCB21    =  CGCCTACACTTGCACCAAAC, CTCGCCCTCAAGTTCTCTGT
+MSCB22    =  AATAGCTTGTGGGCCAACCT, TCGAAATGATCTCTTAAGTATGAAGCT
+MSCB23    =  TGGAGACTAAGCGTTTGATTGA, CATACGCGATCCAATGTCCA
+MSCB24    =  GGGCAGATCCTCATCACTGA, CCAAACAGATACTTCAATGCATCAAC
+MSCB25    =  GCCTAATTGTGGCCAGTTGA, AGGTTTGGATCTAATCATCTTAAGGAC
+MSCB26    =  CGGCCTCAAATCGGAGTCAA, CGATTCCACCCAACGGATGA
+MSCB27    =  TCAAAGCCAACCCACATCCA, ACAAGAATCAAACTGGGATGGGA
+MSCB28    =  ACTGCTCCCACATAGACATGG, CTCTGCCTCTGAGCTTGCAT
+MSCB29    =  TGGGTTCACATATGAAGTCATTATAGG, TCGACCCGATTTGGAAAGTCA
+MSCB30    =  AGATTGGACAACTTGGCGTC, TCAACTGGCCACAATTAGGC
+MSCB31    =  GGTTCATTGGGTTCATATTTATGGG, AAGAGCACCTCCATTAGCAG
+MSCB32    =  CGGTTACCCTAAATGCTGAACC, ACTGCAAGATAAGGCGCCTT
+MSCB33    =  GCCAATGCAGATCTCCCTCA, CCTTCGTTCACAGCATTGCA
+MSCB34    =  TGGAGACAGCAGAATGGGTT, GGCCATGGAGATCACATGAAC
+MSCB35    =  GGTATGACTGAAGCGTCGGT, ATCCTTTGCCTGGGACAAGG
+MSCB36    =  GGGCATTGGAACTCAAACGG, TCTGCAGCAACATCACGTCT
+MSCB37    =  GCCAATGCAGATCTCCCTCA, CCTTCGTTCACAGCATTGCA
+MSCB38    =  GCGAGAGTTTAAAGAAATATTCGATCA, TGCACCACATGATAGGAGGAG
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[prefix]
+; Specify all known prefix sequences of each STR marker, separated by commas.
+; The prefix is the sequence between the left flank and the repeat and is
+; omitted from allele names. The first sequence listed is used as the reference
+; sequence for that marker when generating allele names. Deviations from the
+; reference are expressed as variants.
+
+[suffix]
+; Specify all known suffix sequences of each STR marker, separated by commas.
+; The suffix is the sequence between the repeat and the right flank. The first
+; sequence listed is used as the reference sequence for that marker when
+; generating allele names.
+
+
+[repeat]
+; Specify the repeat structure of each STR marker in space-separated triples of
+; sequence, minimum number of repeats, and maximum number of repeats.
+MSCB01    = AG 0 60
+MSCB02    = GA 0 60
+MSCB03    = CGC 0 60
+MSCB04    = TC 0 60
+MSCB05    = GCCCAG 0 60
+MSCB06    = ATC 0 60
+MSCB07    = ATT 0 60
+MSCB08    = TTC 0 60
+MSCB09    = GA 0 60
+MSCB10    = TTC 0 60
+MSCB11    = AAT 0 60
+MSCB12    = ATG 0 60
+MSCB13    = CA 0 60
+MSCB14    = GAT 0 60
+MSCB15    = TA 0 60
+MSCB16    = AG 0 60
+MSCB17    = AT 0 60
+MSCB18    = AC 0 60
+MSCB19    = CGG 0 60
+MSCB20    = GAA 0 60
+MSCB21    = TGT 0 60
+MSCB22    = AGA 0 60
+MSCB23    = TA 0 60
+MSCB24    = TGC 0 60
+MSCB25    = TTA 0 60
+MSCB26    = CGG 0 60
+MSCB27    = GA 0 60
+MSCB28    = GA 0 60
+MSCB29    = AT 0 60
+MSCB30    = AAT 0 60
+MSCB31    = GA 0 60
+MSCB32    = AG 0 60
+MSCB33    = CT 0 60
+MSCB34    = ATG 0 60
+MSCB35    = GA 0 60
+MSCB36    = CTGGGC 0 60
+MSCB37    = TC 0 60
+MSCB38    = AT 0 60
+
+[length_adjust]
+; To prevent discrepancies between traditional CE allele numbers and the CE
+; number in FDSTools allele names, the CE allele number as calculated by
+; FDSTools is based on the length of the sequence (prefix+repeat+suffix) minus
+; the adjustment specified here.
+; D1S1656  =  8
+; D22S1045 = -9
+
+[block_length]
+; Specify the repeat unit length of each STR marker. The default length is 4.
+MSCB01    = 2
+MSCB02    = 2
+MSCB03    = 3
+MSCB04    = 2
+MSCB05    = 6
+MSCB06    = 3
+MSCB07    = 3
+MSCB08    = 3
+MSCB09    = 2
+MSCB10    = 3
+MSCB11    = 3
+MSCB12    = 3
+MSCB13    = 2
+MSCB14    = 3
+MSCB15    = 2
+MSCB16    = 2
+MSCB17    = 2
+MSCB18    = 2
+MSCB19    = 3
+MSCB20    = 3
+MSCB21    = 3
+MSCB22    = 3
+MSCB23    = 2
+MSCB24    = 3
+MSCB25    = 3
+MSCB26    = 3
+MSCB27    = 2
+MSCB28    = 2
+MSCB29    = 2
+MSCB30    = 3
+MSCB31    = 2
+MSCB32    = 2
+MSCB33    = 2
+MSCB34    = 3
+MSCB35    = 2
+MSCB36    = 6
+MSCB37    = 2
+MSCB38    = 2
+
+
+[max_expected_copies]
+; Specify the maximum expected number of copies (i.e., alleles) for each marker
+; in a single reference sample (only used for allelefinder). The default is 2.
+; Specify 1 here for haploid markers (i.e., those on the Y chromosome).
+MSCB01    = 4
+MSCB02    = 4
+MSCB03    = 4
+MSCB04    = 4
+MSCB05    = 4
+MSCB06    = 4
+MSCB07    = 4
+MSCB08    = 4
+MSCB09    = 4
+MSCB10    = 4
+MSCB11    = 4
+MSCB12    = 4
+MSCB13    = 4
+MSCB14    = 4
+MSCB15    = 4
+MSCB16    = 4
+MSCB17    = 4
+MSCB18    = 4
+MSCB19    = 4
+MSCB20    = 4
+MSCB21    = 4
+MSCB22    = 4
+MSCB23    = 4
+MSCB24    = 4
+MSCB25    = 4
+MSCB26    = 4
+MSCB27    = 4
+MSCB28    = 4
+MSCB29    = 4
+MSCB30    = 4
+MSCB31    = 4
+MSCB32    = 4
+MSCB33    = 4
+MSCB34    = 4
+MSCB35    = 4
+MSCB36    = 4
+MSCB37    = 4
+MSCB38    = 4
+
+[expected_allele_length]
+; Specify one or two values for each marker. The first value gives the expected
+; minimum length (in nucleotides, including prefix and suffix, excluding
+; flanks) of the alleles and the second value (if given) specifies the maximum
+; allele length expected for that marker (both inclusive). TSSV will filter
+; sequences that have a length outside this range.
+

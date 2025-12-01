@@ -14,6 +14,8 @@ try:
 except (IndexError, ValueError):
     N_LINES_TO_PROCESS = 2 # Default to 2 if no argument is given
 
+MIN_SEQUENCE_LENGTH = 8   
+MIN_FREQUENCY_RATIO = 0.1 # manuel changeable
 print(f"✅ Processing the top {N_LINES_TO_PROCESS} candidates for each locus.")
 
 folder_path = '../filtered_results/filtered_tssvResults'
@@ -25,7 +27,7 @@ locus_coverage_file = "../LocusCoverageperIndividual_nSSR_FullLength.txt"
 def extract_names_from_folder(folder_path):
     folder = Path(folder_path)
     extracted_names = []
-    pattern = re.compile(r"^(.*_[AB])_")  # Updated pattern
+    pattern = re.compile(r"^(.*)\.csv$")
 
     for file in folder.rglob("*.csv"):  # Recursively find all CSV files
         match = pattern.match(file.name)
@@ -38,6 +40,8 @@ sample_list = extract_names_from_folder(folder_path)
 
 
 def process_sample(extrande, num_lines_to_keep):
+    if extrande.endswith('_tssv_filtered'):
+        extrande = extrande.replace('_tssv_filtered', '') 
     def search_folder(folder_path, keyword):
         for file_name in os.listdir(folder_path):
             if keyword in file_name and file_name.endswith('.csv'):
@@ -98,8 +102,10 @@ def process_sample(extrande, num_lines_to_keep):
             for candidate in loci_data:
                 try:
                     percent = round(int(candidate[1]) / locus_score, 3)
+                    seq_len = len(candidate[0])
+                    if seq_len >= MIN_SEQUENCE_LENGTH and percent >= MIN_FREQUENCY_RATIO:                      
+                        candidates_list.append((candidate[0], seq_len, percent))
                     # Store as a tuple: (sequence, length, frequency)
-                    candidates_list.append((candidate[0], len(candidate[0]), percent))
                 except ValueError:
                     # Handle case where candidate[1] is not a number
                     candidates_list.append((candidate[0], len(candidate[0]), "N/A"))

@@ -2,14 +2,56 @@ import csv
 import sys  # Import sys to read command-line arguments
 
 # --- Parameter Part ---
-# Get 'n' from command line, default to 2
-try:
-    # sys.argv[0] is the script name, sys.argv[1] is the first arg
-    N_ALLELES = int(sys.argv[1])
-except (IndexError, ValueError):
-    N_ALLELES = 2  # Default to 2 if no argument is given
+# Usage examples:
+# 1. Standard: python Step4_AlleleInfo_naming.py 2 human
+# 2. Shortcut: python Step4_AlleleInfo_naming.py human (Defaults to N=2)
+# 3. Default:  python Step4_AlleleInfo_naming.py (Defaults to N=2, Mode=genalex)
 
-print(f"✅ Processing {N_ALLELES} allele columns for naming.")
+# Defaults
+N_ALLELES = 2
+MODE_INPUT = 'genalex'
+
+# Map modes to Column Indices based on your dictionary
+# Index 1: Human_ID, Index 2: GenAlEx_ID, Index 3: Original_AlleleSeqCode
+MODE_MAP = {
+    'human': 1,
+    'genalex': 2,
+    'original': 3
+}
+
+# Argument Parsing Logic
+if len(sys.argv) > 1:
+    first_arg = sys.argv[1]
+    
+    # Case A: First argument is a number (Ploidy/N_ALLELES)
+    if first_arg.isdigit():
+        N_ALLELES = int(first_arg)
+        
+        # Check for second argument (Mode)
+        if len(sys.argv) > 2:
+            MODE_INPUT = sys.argv[2].lower()
+            
+    # Case B: First argument is NOT a number (Likely Mode)
+    else:
+        potential_mode = first_arg.lower() # Handle case-insensitivity
+        if potential_mode in MODE_MAP:
+            MODE_INPUT = potential_mode
+            N_ALLELES = 2  # Default assumption for shortcut
+            print(f"ℹ️ Detected mode '{MODE_INPUT}' as first argument. Setting N_ALLELES to default (2).")
+        else:
+            print(f"⚠️ Warning: Argument '{first_arg}' is not a valid number or mode.")
+            print("   Using defaults: N_ALLELES=2, MODE='genalex'")
+
+# Final Validation
+if MODE_INPUT not in MODE_MAP:
+    print(f"⚠️ Warning: Unknown mode '{MODE_INPUT}'. Using default 'genalex'.")
+    MODE_INPUT = 'genalex'
+
+TARGET_INDEX = MODE_MAP[MODE_INPUT]
+
+print(f"✅ Processing {N_ALLELES} allele columns.")
+print(f"✅ Output Mode: {MODE_INPUT} (Column Index {TARGET_INDEX})")
+
 # --- End Parameter Part ---
 
 
@@ -20,29 +62,33 @@ def load_dictionary(dict_path):
             reader = csv.reader(f)
             next(reader)  # skip header
             for row in reader:
-                if len(row) >= 4:  # Ensure row has at least 4 columns
+                # We need at least 5 columns to reach Full_Sequence (Index 4)
+                if len(row) >= 5:
                     dictionary.append(row)
     except FileNotFoundError:
         print(f"Error: Dictionary file not found at {dict_path}")
-        sys.exit(1) # Exit the script if dictionary is missing
+        sys.exit(1)
     return dictionary
 
 
-def search_in_dictionary(dictionary, search_string):
+def search_in_dictionary(dictionary, search_string, target_col_idx):
     # Optimization: Don't search for "N/A"
-    if search_string == "N/A":
+    if search_string in ["N/A", ""]:
         return "N/A"
         
     for row in dictionary:
-        # Assumes sequence is in 4th column (index 3) and name is in 2nd (index 1)
-        if row[3] == search_string:
-            return row[1]  # Return the name
+        # Full_Sequence is at Index 4 (Column 5)
+        # Target Name is at target_col_idx
+        if row[4] == search_string:
+            return row[target_col_idx]
+            
     return search_string  # If not found, keep original sequence
 
 
 alleleinfo_path = '../new_output/AlleleInfo.csv'
 dict_path = '../new_output/AlleleInfo_dictionary.csv'
-output_path = '../new_output/AlleleInfo_named.csv'
+# Add mode to filename to avoid overwriting differently named files
+output_path = f'../new_output/AlleleInfo_named_{MODE_INPUT}.csv'
 
 # Load dictionary
 dictionary = load_dictionary(dict_path)
@@ -65,30 +111,23 @@ try:
             
         writer.writerow(header)
 
-        # --- (MODIFICATION) ---
         # Define the start and end index for allele columns
         allele_start_index = 3  # Corresponds to Allele1 (row[3])
-        # The loop will go up to, but not include, this index
         allele_end_index = allele_start_index + N_ALLELES 
-        # --- (END MODIFICATION) ---
 
         for row in reader:
-            # Ensure row is not empty
             if not row:
                 continue
 
-            # --- (MODIFICATION) ---
-            # Loop from Allele1 (index 3) up to AlleleN
+            # Loop from Allele1 up to AlleleN
             for i in range(allele_start_index, allele_end_index):
-                # Check if the row has this many columns (avoids errors on short rows)
                 if i < len(row):
-                    # Pass the value (e.g., row[3]) to the search function
-                    row[i] = search_in_dictionary(dictionary, row[i])
-            # --- (END MODIFICATION) ---
+                    # Pass the target_index to the search function
+                    row[i] = search_in_dictionary(dictionary, row[i], TARGET_INDEX)
             
             writer.writerow(row)
 
-    print(f"AlleleInfo with names saved to {output_path}")
+    print(f"✅ Finished! Saved to: {output_path}")
 
 except FileNotFoundError:
     print(f"Error: Input file not found at {alleleinfo_path}")
