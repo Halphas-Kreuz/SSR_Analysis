@@ -11,6 +11,7 @@ import re
 import math
 from collections import Counter
 from datetime import datetime
+import os
 
 # --- Parameter Part ---
 # Usage: python Step7_bayesianMultiploidy.py [PLOIDY] [MODE]
@@ -42,10 +43,10 @@ print(f"  - Mode:   {MODE_INPUT}")
 
 # --- File Paths ---
 # INPUT: Output from Step 6a
-INPUT_CSV = f"../new_output/AlleleInfo_named_fused_{MODE_INPUT}.csv"
+INPUT_CSV = f"../new_output/Step6a_AlleleInfo_named_fused_{MODE_INPUT}.csv"
 
 # OUTPUT: Likelihoods file
-OUTPUT_CSV = f"../new_output/likelihoods_Ploidy{PLOIDY}_{MODE_INPUT}.csv"
+OUTPUT_CSV = f"../new_output/Step7_likelihoods_Ploidy{PLOIDY}_{MODE_INPUT}.csv"
 
 # Pseudo-count scaling factor for multinomial likelihood
 N_SCALE = 1000  

@@ -7,7 +7,8 @@ import collections
 # Usage: python Step3b_DictionaryPatcher.py [MODE]
 # Default Mode: human
 
-DICT_PATH = '../new_output/AlleleInfo_dictionary.csv'
+DICT_PATH = '../new_output/Step3_AlleleInfo_dictionary.csv'
+PATCHED_DICT_PATH = '../new_output/Step3b_Patched_AlleleInfo_dictionary.csv'
 
 def patch_dictionary():
     # 1. Parse Mode from Command Line
@@ -16,7 +17,7 @@ def patch_dictionary():
         mode = sys.argv[1].lower()
     
     # Dynamic Filename based on Mode
-    named_file_path = f'../new_output/AlleleInfo_named_{mode}.csv'
+    named_file_path = f'../new_output/Step4_AlleleInfo_named_{mode}.csv'
 
     print(f"⚙️  Running Dictionary Patcher v2 (Priority Mode)")
     print(f"   Mode: {mode}")
@@ -157,8 +158,8 @@ def patch_dictionary():
         # New entries go FIRST
         df_combined = pd.concat([df_new, df_dict], ignore_index=True)
         
-        df_combined.to_csv(DICT_PATH, index=False)
-        print(f"✅ Dictionary updated! Saved to {DICT_PATH}")
+        df_combined.to_csv(PATCHED_DICT_PATH, index=False)
+        print(f"✅ Dictionary updated! Saved to {PATCHED_DICT_PATH}")
     else:
         print("✅ No orphan sequences found. Dictionary is up to date.")
 

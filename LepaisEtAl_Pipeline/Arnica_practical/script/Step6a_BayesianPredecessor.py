@@ -23,13 +23,13 @@ print(f"✅ Mode: {MODE_INPUT}")
 # --- File Paths ---
 # INPUT 1: The Named Allele File from Step 4
 # We look for the file corresponding to the requested mode
-alleleinfo_path = f'../new_output/AlleleInfo_named_{MODE_INPUT}.csv'
+alleleinfo_path = f'../new_output/Step4_AlleleInfo_named_{MODE_INPUT}.csv'
 
 # INPUT 2: The Comparison Table (Confirmed stable)
-comparison_path = '../new_output/table/All_SequenceComparisons.csv'
+comparison_path = '../new_output/table/Step6_All_SequenceComparisons.csv'
 
 # OUTPUT: The Fused File
-output_path = f'../new_output/AlleleInfo_named_fused_{MODE_INPUT}.csv'
+output_path = f'../new_output/Step6a_AlleleInfo_named_fused_{MODE_INPUT}.csv'
 
 # --- Main Script Logic ---
 

@@ -161,9 +161,9 @@ def main():
     args = parser.parse_args()
     
     # Construct Filenames Dynamically
-    # Matches Step 7 output: ../new_output/likelihoods_Ploidy2_human.csv
-    input_file = f"../new_output/likelihoods_Ploidy{args.ploidy}_{args.mode}.csv"
-    output_file = f"../new_output/final_genotypes_Ploidy{args.ploidy}_{args.mode}.txt"
+    # Matches Step 7 output: ../new_output/Step7_likelihoods_Ploidy2_human.csv
+    input_file = f"../new_output/Step7_likelihoods_Ploidy{args.ploidy}_{args.mode}.csv"
+    output_file = f"../new_output/Step8_final_genotypes_Ploidy{args.ploidy}_{args.mode}.txt"
 
     process_file_generic(input_file, output_file, args.ploidy)
 

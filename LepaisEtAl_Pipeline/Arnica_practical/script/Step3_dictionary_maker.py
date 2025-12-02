@@ -6,7 +6,7 @@ import glob
 # --- Configuration ---
 # Match any AlleleInformationFile txt
 DEFAULT_INPUT_PATTERN = '../AlleleInformationFile_*.txt'
-OUTPUT_FILE = '../new_output/AlleleInfo_dictionary.csv'
+OUTPUT_FILE = '../new_output/Step3_AlleleInfo_dictionary.csv'
 
 def txt_to_csv(txt_path, csv_path):
     """Converts a tab-delimited text file to a CSV file."""

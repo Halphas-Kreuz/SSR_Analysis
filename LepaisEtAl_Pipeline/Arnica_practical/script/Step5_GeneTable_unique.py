@@ -1,4 +1,4 @@
-import os
+import os  # ADDED: For checking file existence
 import csv
 import sys
 
@@ -7,10 +7,10 @@ import sys
 # Modes: 'human' (default), 'genalex', 'original'
 
 # Defaults
-MODE_INPUT = 'genalex' 
+MODE_INPUT = 'human' 
 
 # Map modes to Dictionary Column Indices (From Step 3 Dictionary)
-# Index 1: Human_ID (e.g. Arm01_83) -> DEFAULT
+# Index 1: Human_ID (e.g. Arm01_83) 
 # Index 2: GenAlEx_ID (e.g. 83)
 # Index 3: Original_AlleleSeqCode (e.g. 101)
 MODE_MAP = {
@@ -36,7 +36,7 @@ print(f"✅ Output Mode: {MODE_INPUT} (Using Dictionary Column {TARGET_INDEX})")
 
 def load_lookup_dictionary(dict_path, target_idx):
     """
-    Loads the dictionary CSV from Step 3.
+    Loads the dictionary CSV from Step 3b output.
     Key: Fused_Index (Column 0, e.g. Arm01_101)
     Value: The Target ID defined by MODE (Human/GenAlEx/Original)
     """
@@ -52,20 +52,32 @@ def load_lookup_dictionary(dict_path, target_idx):
                     target_id = row[target_idx] # Value: Target Name
                     lookup_dict[fused_index] = target_id
     except FileNotFoundError:
-        print(f"\n❌ Error: Dictionary file not found at '{dict_path}'")
-        print("👉 Solution: Please run Step 3 (Dictionary Maker) first to generate 'AlleleInfo_dictionary.csv'.\n")
-        sys.exit(1) # Stop script
+        # NOTE: File check is now handled by os.path.exists outside this function, 
+        # so this block is for internal function safety only.
+        print(f"Error: Dictionary file not found at '{dict_path}'")
+        sys.exit(1) 
     return lookup_dict
 
-# --- File Paths ---
-# INPUT 1: The Raw Genotypic Table (Ensure this path is correct)
+# --- File Paths and MANDATORY Dependency Check ---
+# INPUT 1: The Raw Genotypic Table 
 genotype_input_file = "../GenotypicTable_nSSR_FullLength_ParameterSet1_sa50_sb10_m15_n20.txt"
 
-# INPUT 2: The Dictionary from Step 3
-dictionary_file = '../new_output/AlleleInfo_dictionary.csv'
+# INPUT 2: The Patched Dictionary from Step 3b (Mandatory)
+PATCHED_DICT_PATH = '../new_output/Step3b_Patched_AlleleInfo_dictionary.csv'
 
-# OUTPUT: New fused table with mode in filename
-output_file = f"../new_output/GenotypicTable_fused_{MODE_INPUT}.txt"
+# Check for mandatory dependency (Step 3b output)
+if os.path.exists(PATCHED_DICT_PATH):
+    dictionary_file = PATCHED_DICT_PATH
+    print("Step 5: Using MANDATORY patched dictionary.")
+else:
+    # If the patched file is missing, fail immediately and clearly.
+    print(f"[FAILED] Step 5 Error: Cannot run.")
+    print(f"Solution: Please ensure Step 3b (Dictionary Patcher) ran successfully and created: {PATCHED_DICT_PATH}")
+    sys.exit(1) # Stop script
+
+# OUTPUT: New fused table with step number and mode in filename
+# RENAMING: Step5_GenotypicTable_fused_[MODE].txt
+output_file = f"../new_output/Step5_GenotypicTable_fused_{MODE_INPUT}.txt"
 
 # --- Main Script Logic ---
 
@@ -116,6 +128,8 @@ try:
     print(f"✅ Transformation complete. Final table written to: {output_file}")
 
 except FileNotFoundError:
-    print(f"\n❌ Error: Raw Genotype Input file not found at '{genotype_input_file}'")
-    print("👉 Solution: This file is usually the output of the initial SSRseq extraction. Please check the file path.")
+    print(f"Error: Raw Genotype Input file not found at '{genotype_input_file}'")
+    print("Solution: This file is usually the output of the initial SSRseq extraction. Please check the file path.")
     sys.exit(1)
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")

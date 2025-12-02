@@ -1,5 +1,6 @@
 import csv
 import sys  # Import sys to read command-line arguments
+import os
 
 # --- Parameter Part ---
 # Usage examples:
@@ -37,7 +38,7 @@ if len(sys.argv) > 1:
         if potential_mode in MODE_MAP:
             MODE_INPUT = potential_mode
             N_ALLELES = 2  # Default assumption for shortcut
-            print(f"ℹ️ Detected mode '{MODE_INPUT}' as first argument. Setting N_ALLELES to default (2).")
+            print(f"Detected mode '{MODE_INPUT}' as first argument. Setting N_ALLELES to default (2).")
         else:
             print(f"⚠️ Warning: Argument '{first_arg}' is not a valid number or mode.")
             print("   Using defaults: N_ALLELES=2, MODE='genalex'")
@@ -85,10 +86,21 @@ def search_in_dictionary(dictionary, search_string, target_col_idx):
     return search_string  # If not found, keep original sequence
 
 
-alleleinfo_path = '../new_output/AlleleInfo.csv'
-dict_path = '../new_output/AlleleInfo_dictionary.csv'
-# Add mode to filename to avoid overwriting differently named files
-output_path = f'../new_output/AlleleInfo_named_{MODE_INPUT}.csv'
+alleleinfo_path = '../new_output/Step2_AlleleInfo.csv'
+
+ORIGINAL_DICT_PATH = '../new_output/Step3_AlleleInfo_dictionary.csv'
+PATCHED_DICT_PATH = '../new_output/Step3b_Patched_AlleleInfo_dictionary.csv'
+
+# 2. Decide which dictionary to use
+if os.path.exists(PATCHED_DICT_PATH):
+    dict_path = PATCHED_DICT_PATH
+    print("Step 4: use patched dictionary (Step 3b output).")
+else:
+    dict_path = ORIGINAL_DICT_PATH
+    print("Step 4: use original dictionary (Step 3 output).")
+
+# 3. Define output path (also update naming convention)
+output_path = f'../new_output/Step4_AlleleInfo_named_{MODE_INPUT}.csv'
 
 # Load dictionary
 dictionary = load_dictionary(dict_path)

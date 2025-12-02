@@ -99,7 +99,7 @@ except FileNotFoundError:
 
 # Step 2: Read dictionary CSV and collect patterns per locus
 locus_to_data = defaultdict(list)
-dict_path = '../new_output/AlleleInfo_dictionary.csv'
+dict_path = '../new_output/Step3b_Patched_AlleleInfo_dictionary.csv'
 
 try:
     with open(dict_path, newline='') as csvfile:
@@ -181,7 +181,7 @@ for locus in locus_list:
                 writer.writerow([label1, label2, matrix[i][j]])
 
 # Write combined output file
-combined_output_file = '../new_output/table/All_SequenceComparisons.csv'
+combined_output_file = '../new_output/table/Step6_All_SequenceComparisons.csv'
 with open(combined_output_file, 'w', newline='') as allcsv:
     writer = csv.writer(allcsv)
     writer.writerow(all_header)
